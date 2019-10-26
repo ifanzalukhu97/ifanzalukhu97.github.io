@@ -21,7 +21,7 @@ description: Junior Android Programmer
 # List of links in the navigation bar
 navbar-links:
   About Me: "aboutme"
-  Resources:
+  My Projects:
     - Movies Project: "https://ifanzalukhu97.github.io/Final-Project/index.html"
     - Android Navigation: "https://github.com/ifanzalukhu97/android-navigation-component"
   Author's home: "https://ifanzalukhu97.github.io/"
