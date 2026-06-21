@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Problem to Product — Ifan | IEC 2026</title>
+<style>
+/* ===== DARK MODE (default) ===== */
+:root {
+  --bg:      #0d0d0d;
+  --bg2:     #141414;
+  --bg3:     #1c1c1c;
+  --lime:    #aaff00;
+  --lime2:   #c5ff4d;
+  --lime-bg: rgba(170,255,0,0.08);
+  --lime-border: rgba(170,255,0,0.25);
+  --text:    #ffffff;
+  --text2:   #cccccc;
+  --gray:    #888888;
+  --gray2:   #444444;
+  --border:  rgba(255,255,255,0.08);
+  --card-bg: #141414;
+  --code-bg: #0a0a0a;
+  --red:     #ff5555;
+  --yellow:  #ffd166;
+  --radius:  14px;
+  --shadow:  none;
+}
+
+/* ===== LIGHT MODE ===== */
+body.light {
+  --bg:      #f7f7f5;
+  --bg2:     #eeeeeb;
+  --bg3:     #e4e4e0;
+  --lime:    #3a8200;
+  --lime2:   #2d6600;
+  --lime-bg: rgba(58,130,0,0.08);
+  --lime-border: rgba(58,130,0,0.3);
+  --text:    #111111;
+  --text2:   #333333;
+  --gray:    #666666;
+  --gray2:   #aaaaaa;
+  --border:  rgba(0,0,0,0.1);
+  --card-bg: #eeeeeb;
+  --code-bg: #e0e0db;
+  --red:     #cc2222;
+  --yellow:  #a06000;
+  --shadow:  0 2px 12px rgba(0,0,0,0.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:var(--bg);font-family:'Segoe UI','Inter',system-ui,sans-serif;color:var(--text);transition:background 0.3s,color 0.3s;}
+
+/* ===== DECK ===== */
+#deck{position:fixed;inset:0;z-index:1;}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:64px 6%;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s ease,transform 0.4s ease;
+  transform:translateY(20px);overflow:hidden;
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0);}
+.slide.out{opacity:0;transform:translateY(-20px);}
+
+/* ===== PROGRESS ===== */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--lime);z-index:100;transition:width 0.4s ease;}
+#slide-info{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--gray);z-index:100;letter-spacing:2px;}
+
+/* ===== NAV ===== */
+#nav{position:fixed;bottom:16px;right:24px;display:flex;gap:8px;z-index:100;}
+.nav-btn{
+  background:var(--bg2);border:1px solid var(--border);color:var(--text);
+  width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:all 0.2s;
+}
+.nav-btn:hover{border-color:var(--lime);color:var(--lime);}
+#btn-theme{font-size:16px;}
+
+/* ===== NOTES PANEL ===== */
+#notes{
+  position:fixed;right:0;top:0;bottom:0;width:280px;
+  background:var(--bg);border-left:1px solid var(--border);
+  z-index:99;transform:translateX(100%);transition:transform 0.3s ease;
+  display:flex;flex-direction:column;
+}
+#notes.open{transform:translateX(0);}
+#notes-header{padding:16px 20px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--lime);letter-spacing:2px;text-transform:uppercase;}
+#notes-body{padding:16px 20px;font-size:13px;line-height:1.8;overflow-y:auto;flex:1;color:var(--text2);}
+#notes-body .hint{margin-bottom:10px;padding:10px 14px;background:var(--lime-bg);border-left:2px solid var(--lime);border-radius:4px;}
+#notes-body .hint strong{color:var(--lime);display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+#notes-body .point{margin-bottom:8px;padding-left:14px;border-left:1px solid var(--gray2);color:var(--gray);font-size:12.5px;}
+
+/* ===== TYPOGRAPHY ===== */
+.slide-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:var(--text);line-height:1.15;margin-bottom:12px;}
+.slide-title .accent{color:var(--lime);}
+.slide-subtitle{font-size:clamp(0.9rem,1.8vw,1.15rem);color:var(--gray);margin-bottom:28px;line-height:1.6;}
+.tag{display:inline-block;background:var(--lime-bg);border:1px solid var(--lime-border);color:var(--lime);font-size:11px;padding:4px 12px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;}
+
+/* ===== CARDS ===== */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);}
+.card.lime-border{border-color:var(--lime-border);}
+.card.highlight{background:var(--lime-bg);border-color:var(--lime-border);}
+
+/* ===== GRIDS ===== */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;max-width:900px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;max-width:1000px;}
+
+/* ===== LISTS ===== */
+.dot-list{list-style:none;width:100%;}
+.dot-list li{padding:9px 0 9px 24px;position:relative;font-size:clamp(0.82rem,1.6vw,1rem);color:var(--text2);line-height:1.5;border-bottom:1px solid var(--border);}
+.dot-list li::before{content:'—';position:absolute;left:0;color:var(--lime);font-weight:700;}
+.dot-list li.bad::before{content:'✕';color:var(--red);}
+.dot-list li.good::before{content:'✓';color:var(--lime);}
+
+/* ===== QUOTE ===== */
+.blockquote{border-left:3px solid var(--lime);padding:14px 20px;font-size:clamp(0.88rem,1.8vw,1.1rem);color:var(--text2);line-height:1.7;font-style:italic;background:var(--lime-bg);border-radius:0 8px 8px 0;}
+.blockquote .attr{font-size:0.75rem;color:var(--gray);margin-top:6px;font-style:normal;font-weight:600;letter-spacing:0.5px;}
+
+/* ===== COMPARE ===== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:900px;}
+.compare-col{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+.compare-col.active-col{border-color:var(--lime-border);background:var(--lime-bg);}
+.compare-header{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.compare-step{padding:8px 12px;margin:5px 0;border-radius:7px;font-size:0.84rem;color:var(--gray);background:var(--bg);border:1px solid var(--border);}
+.compare-step.lime{color:var(--text);background:var(--lime-bg);border-color:var(--lime-border);}
+
+/* ===== PHASES ===== */
+.timeline{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;max-width:960px;}
+.phase{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:18px;flex:1;min-width:150px;text-align:center;opacity:0;transform:translateY(16px);transition:all 0.5s ease;}
+.phase.visible{opacity:1;transform:translateY(0);}
+.phase-num{font-size:1.8rem;font-weight:900;color:var(--lime);line-height:1;}
+.phase-label{font-size:0.68rem;color:var(--gray);margin-top:2px;text-transform:uppercase;letter-spacing:1px;}
+.phase-title{font-size:0.88rem;font-weight:700;color:var(--text);margin-top:8px;}
+.phase-desc{font-size:0.75rem;color:var(--gray);margin-top:6px;line-height:1.5;}
+
+/* ===== DEMO ===== */
+.demo-wrap{border:1px solid var(--lime-border);border-radius:18px;padding:24px 28px;background:var(--lime-bg);max-width:780px;width:100%;}
+.demo-num{font-size:2.5rem;font-weight:900;color:var(--lime);line-height:1;}
+.demo-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;color:var(--text);margin:6px 0 3px;}
+.demo-sub{font-size:0.88rem;color:var(--gray);}
+.code-block{margin-top:16px;background:var(--code-bg);border:1px solid var(--lime-border);border-radius:10px;padding:16px;text-align:left;font-family:'Consolas','Courier New',monospace;font-size:0.82rem;line-height:1.8;}
+
+/* ===== MEME ===== */
+.meme-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;box-shadow:var(--shadow);}
+.meme-emoji{font-size:48px;line-height:1.2;margin:8px 0;}
+.meme-label{font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.meme-text{font-family:'Impact','Arial Black',sans-serif;font-size:1rem;text-transform:uppercase;letter-spacing:0.5px;}
+
+/* ===== BML LOOP ===== */
+.bml{display:flex;align-items:center;gap:0;justify-content:center;flex-wrap:wrap;}
+.bml-node{width:120px;height:120px;border-radius:50%;border:2px solid var(--lime-border);display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--lime-bg);flex-shrink:0;}
+.bml-icon{font-size:1.6rem;margin-bottom:4px;}
+.bml-label{font-size:0.7rem;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:1px;}
+.bml-arrow{color:var(--gray2);font-size:1.8rem;padding:0 8px;}
+
+/* ===== AGILE MVP ILLUSTRATION ===== */
+.mvp-track{display:flex;align-items:flex-start;gap:0;width:100%;max-width:860px;position:relative;}
+.mvp-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;position:relative;}
+.mvp-step::after{content:'→';position:absolute;right:-10px;top:32px;color:var(--gray2);font-size:1.2rem;z-index:1;}
+.mvp-step:last-child::after{display:none;}
+.mvp-icon{width:72px;height:72px;border-radius:12px;background:var(--card-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all 0.3s;flex-shrink:0;}
+.mvp-icon.active{border-color:var(--lime);background:var(--lime-bg);box-shadow:0 0 0 4px var(--lime-bg);}
+.mvp-version{font-size:0.65rem;color:var(--lime);font-weight:700;letter-spacing:1px;margin-top:6px;text-transform:uppercase;}
+.mvp-name{font-size:0.75rem;font-weight:600;color:var(--text);margin-top:2px;text-align:center;}
+.mvp-value{font-size:0.68rem;color:var(--gray);margin-top:3px;text-align:center;line-height:1.3;}
+.mvp-need{text-align:center;font-size:0.78rem;color:var(--gray);margin-bottom:12px;font-style:italic;}
+.mvp-bad{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px;}
+.mvp-bad-step{width:60px;height:60px;background:var(--bg2);border:1px solid rgba(255,85,85,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;opacity:0.6;}
+
+/* ===== HIGHLIGHT ===== */
+.hl{color:var(--lime);font-weight:700;}
+.hl-red{color:var(--red);}
+.hl-yellow{color:var(--yellow);}
+
+/* ===== EVENT PHOTOS ===== */
+.event-photos{display:flex;gap:12px;width:100%;}
+.event-photo{flex:1;border-radius:10px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;object-fit:cover;min-width:0;}
+.event-photo-wrap{flex:1;border-radius:10px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;min-width:0;}
+.event-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* ===== STUDENT CARD ===== */
+.student-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow);transition:border-color 0.2s;}
+.student-card:hover{border-color:var(--lime-border);}
+.student-card-icon{font-size:1.8rem;flex-shrink:0;}
+.student-card-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--lime-bg);color:var(--lime);border:1px solid var(--lime-border);border-radius:20px;padding:2px 8px;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+/* ===== LINK CHIP ===== */
+.link-chip{display:inline-flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:0.78rem;color:var(--lime);text-decoration:none;cursor:pointer;transition:border-color 0.2s;}
+.link-chip:hover{border-color:var(--lime-border);}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.a1{animation:fade-up 0.45s 0.05s both;}
+.a2{animation:fade-up 0.45s 0.15s both;}
+.a3{animation:fade-up 0.45s 0.28s both;}
+.a4{animation:fade-up 0.45s 0.42s both;}
+.a5{animation:fade-up 0.45s 0.56s both;}
+.a6{animation:fade-up 0.45s 0.70s both;}
+.a7{animation:fade-up 0.45s 0.84s both;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:720px){
+  .slide{padding:50px 4%;}
+  .g2,.compare{grid-template-columns:1fr;}
+  .g3{grid-template-columns:1fr 1fr;}
+  .slide-title{font-size:1.4rem;}
+  #notes{width:100%;top:auto;height:60vh;}
+  .bml-node{width:88px;height:88px;}
+  .mvp-track{flex-wrap:wrap;justify-content:center;}
+  .mvp-step{min-width:120px;flex:0 0 calc(20% - 12px);}
+  .event-photos{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="deck">
+
+<!-- ================================================================
+     SLIDE 1 : TITLE
+================================================================ -->
+<div class="slide active" id="s1" data-notes='{"title":"Opening","hints":[]}'>
+  <div style="text-align:center;max-width:860px;">
+    <div class="tag a1">IEC Competition 2026 · SatyaDiLab</div>
+    <h1 class="slide-title a2" style="font-size:clamp(2.2rem,5.5vw,3.8rem);margin-top:20px;">
+      From <span class="accent">Problem</span><br/>to <span class="accent">Product</span>
+    </h1>
+    <p class="a3" style="font-size:clamp(1rem,2.2vw,1.3rem);color:var(--gray);margin-bottom:32px;">
+      How AI Changes the Way We Build Digital Solutions
+    </p>
+    <div class="a4" style="display:inline-flex;align-items:center;gap:14px;background:var(--card-bg);border:1px solid var(--border);border-radius:50px;padding:12px 24px;">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--lime-bg);border:1px solid var(--lime-border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">👨‍💻</div>
+      <div style="text-align:left;">
+        <div style="font-weight:700;font-size:0.95rem;">Ifan Jaya Suswanto Zalukhu</div>
+        <div style="font-size:0.78rem;color:var(--gray);">Head of Engineering · SimpliDOTS · AWS Community Builder</div>
+      </div>
+    </div>
+    <div class="a5" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
+      <span class="tag" style="font-size:10px;">C# / .NET</span>
+      <span class="tag" style="font-size:10px;">Microservices</span>
+      <span class="tag" style="font-size:10px;">SaaS</span>
+      <span class="tag" style="font-size:10px;">AI Engineering</span>
+      <span class="tag" style="font-size:10px;">AWS</span>
+    </div>
+    <p class="a6" style="margin-top:24px;font-size:0.72rem;color:var(--gray2);">← → navigate &nbsp;·&nbsp; N speaker notes &nbsp;·&nbsp; L light mode &nbsp;·&nbsp; F fullscreen</p>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 2 : AGENDA
+================================================================ -->
+<div class="slide" id="s2" data-notes='{"title":"Agenda","hints":["Kasih roadmap sebelum mulai","Bilang ada 4 demo live","Estimasi: ~60 min materi + ~40 min demo + QA","Ini bukan tutorial tools, ini framework berpikir"]}'>
+  <div style="max-width:860px;width:100%;">
+    <div class="tag a1">Agenda</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">What We'll <span class="accent">Cover Today</span></h2>
+    <div class="g2 a3">
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:1.4rem;flex-shrink:0;">🔍</div>
+        <div><div style="font-weight:700;margin-bottom:4px;">Cara Nemuin Masalah yang Benar</div><div style="font-size:0.82rem;color:var(--gray);">Problem discovery sebelum buka code editor</div></div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:1.4rem;flex-shrink:0;">⚡</div>
+        <div><div style="font-weight:700;margin-bottom:4px;">AI-Augmented Lifecycle</div><div style="font-size:0.82rem;color:var(--gray);">Traditional SDLC vs cara baru yang lebih cepat</div></div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:1.4rem;flex-shrink:0;">🚀</div>
+        <div><div style="font-weight:700;margin-bottom:4px;">Build → Measure → Learn</div><div style="font-size:0.82rem;color:var(--gray);">Ship MVP cepat, iterasi dari real feedback</div></div>
+      </div>
+      <div class="card lime-border" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:1.4rem;flex-shrink:0;">🎬</div>
+        <div><div style="font-weight:700;color:var(--lime);margin-bottom:4px;">Live Demo × 4</div><div style="font-size:0.82rem;color:var(--gray);">Vibe Coding · Figma Make · Kiro · n8n</div></div>
+      </div>
+    </div>
+    <div class="a4" style="margin-top:18px;padding:14px 20px;background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:10px;font-size:0.88rem;">
+      <span class="hl">Core message:</span> <span style="color:var(--text2);">AI mempercepat eksekusi — tapi kemampuan nemuin masalah yang benar tetap jadi pembeda kalian.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 3 : DETAILED INTRO (NEW)
+================================================================ -->
+<div class="slide" id="s3" data-notes='{"title":"Intro Lengkap – Siapa Saya","hints":[]}'>
+  <div style="max-width:1000px;width:100%;">
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:24px;align-items:start;">
+      <!-- LEFT: Photo + social -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="position:relative;">
+          <div style="width:100%;border-radius:16px;overflow:hidden;border:2px solid var(--lime-border);aspect-ratio:3/4;">
+            <img src="https://raw.githubusercontent.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/master/images/simplidots-image.jpg" alt="Ifan" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem;background:var(--lime-bg)\'>👨‍💻</div>'">
+          </div>
+          <div style="position:absolute;top:12px;left:12px;background:var(--lime);color:#000;font-size:0.7rem;font-weight:800;padding:4px 10px;border-radius:20px;letter-spacing:1px;">Hi 👋</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a class="link-chip" href="https://linkedin.com/in/ifanzalukhu97" target="_blank">💼 linkedin.com/in/ifanzalukhu97</a>
+          <a class="link-chip" href="https://github.com/ifanzalukhu97" target="_blank">💻 github.com/ifanzalukhu97</a>
+          <a class="link-chip" href="https://medium.com/@ifanzalukhu97" target="_blank">✍️ medium.com/@ifanzalukhu97</a>
+          <a class="link-chip" href="https://dev.to/ifanzalukhu97" target="_blank">🧠 dev.to/ifanzalukhu97</a>
+        </div>
+      </div>
+      <!-- RIGHT: Info + event photos -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <p style="font-size:0.82rem;color:var(--gray);margin-bottom:4px;" class="a1">Perkenalkan, saya</p>
+          <h2 class="slide-title a2" style="font-size:clamp(1.3rem,2.8vw,2rem);margin-bottom:10px;">Ifan Jaya Suswanto <span class="accent">Zalukhu</span></h2>
+          <div class="a3" style="display:flex;flex-direction:column;gap:8px;">
+            <div class="card" style="padding:12px 16px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.2rem;">💼</span>
+              <div>
+                <div style="font-weight:700;font-size:0.9rem;">Head of Engineering</div>
+                <div style="font-size:0.78rem;color:var(--gray);">SimpliDOTS — SaaS company, Medan · 6+ years .NET/C#</div>
+              </div>
+            </div>
+            <div class="card" style="padding:12px 16px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.2rem;">☁️</span>
+              <div>
+                <div style="font-weight:700;font-size:0.9rem;">AWS Community Builder <span class="tag" style="font-size:9px;margin-left:6px;">AI Engineering</span></div>
+                <div style="font-size:0.78rem;color:var(--gray);">Co-organizer AWS User Group Medan</div>
+              </div>
+            </div>
+            <div class="card" style="padding:12px 16px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.2rem;">🔵</span>
+              <div>
+                <div style="font-weight:700;font-size:0.9rem;">GDG Medan — Speaker & Participant</div>
+                <div style="font-size:0.78rem;color:var(--gray);">Topik: AI Journey · Automation · AI Agent</div>
+              </div>
+            </div>
+            <div class="card" style="padding:12px 16px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.2rem;">✍️</span>
+              <div>
+                <div style="font-weight:700;font-size:0.9rem;">Menulis di Medium & Dev.to</div>
+                <div style="font-size:0.78rem;color:var(--gray);">AI · Engineering culture · Tooling · SaaS architecture</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Event photos -->
+        <div class="a4">
+          <div style="font-size:0.7rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📸 Beberapa aktivitas saya</div>
+          <div class="event-photos">
+            <div class="event-photo-wrap">
+              <img src="https://raw.githubusercontent.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/master/images/1754998633393.jpeg" alt="AWS Event" onerror="this.parentElement.style.background='var(--lime-bg)';this.remove();">
+            </div>
+            <div class="event-photo-wrap">
+              <img src="https://raw.githubusercontent.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/master/images/GDG-Sharing-2.jpg" alt="GDG Event" onerror="this.parentElement.style.background='var(--lime-bg)';this.remove();">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 4 : THE HOOK
+================================================================ -->
+<div class="slide" id="s4" data-notes='{"title":"The Hook – Big Opening Question","hints":["Pertanyaan retorik dulu ke audience","Siapa yang pernah build sesuatu tapi ujungnya ga ada yang pakai?","Pause panjang di sini","Kecepatan coding bukan pembeda — JUDGMENT adalah pembeda"]}'>
+  <div style="text-align:center;max-width:780px;">
+    <p class="a1" style="font-size:clamp(1rem,2.2vw,1.3rem);color:var(--gray);margin-bottom:8px;">Di era AI, semua orang bisa</p>
+    <h1 class="slide-title a2" style="font-size:clamp(2.5rem,6vw,4.5rem);color:var(--lime);margin-bottom:8px;">build software lebih cepat</h1>
+    <p class="a3" style="font-size:clamp(1rem,2vw,1.2rem);color:var(--gray);margin-bottom:28px;">Tapi pertanyaan yang lebih penting...</p>
+    <div class="a4" style="background:var(--card-bg);border:1px solid var(--lime-border);border-radius:16px;padding:32px 40px;">
+      <div style="font-size:clamp(1.3rem,3.5vw,2.2rem);font-weight:800;line-height:1.4;">
+        Apakah kamu building<br/>the <span class="hl" style="font-style:italic;">right thing?</span>
+      </div>
+    </div>
+    <div class="a5" style="display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+      <div style="padding:10px 18px;background:rgba(255,85,85,0.07);border:1px solid rgba(255,85,85,0.2);border-radius:8px;font-size:0.85rem;color:var(--red);">✕ Build feature based on assumption</div>
+      <div style="padding:10px 18px;background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:8px;font-size:0.85rem;"><span class="hl">✓</span> Solve problem yang real & tervalidasi</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 5 : WRONG APPROACH
+================================================================ -->
+<div class="slide" id="s5" data-notes='{"title":"Kesalahan Umum – Technology First","hints":["Ini super relatable buat CS students","Tanya: siapa yang pernah mulai dari teknologinya dulu?","Teknologi adalah alat, bukan tujuan","Transition ke: pertanyaan yang lebih tepat"]}'>
+  <div style="max-width:860px;width:100%;">
+    <div class="tag a1">Common Mistake</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Starting From <span class="hl-red">Technology</span>, Not Problem</h2>
+    <div class="g2 a3" style="align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="border-color:rgba(255,85,85,0.2);">
+          <div style="font-size:0.72rem;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">❌ Cara yang salah</div>
+          <ul class="dot-list">
+            <li class="bad" style="color:var(--red);">"Saya mau bikin AI app"</li>
+            <li class="bad" style="color:var(--red);">"Saya mau pakai Blockchain"</li>
+            <li class="bad" style="color:var(--red);">"Saya mau bikin chatbot"</li>
+          </ul>
+          <div style="margin-top:10px;font-size:0.8rem;color:var(--gray);">Teknologi dulu → masalah belakangan → user ga butuh</div>
+        </div>
+        <div class="card highlight">
+          <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">✓ Pertanyaan yang benar</div>
+          <div style="font-size:1.05rem;font-weight:700;">"Masalah apa yang ingin saya selesaikan?"</div>
+          <div style="margin-top:8px;font-size:0.82rem;color:var(--gray);">Problem dulu → solusi → teknologi sebagai enabler</div>
+        </div>
+      </div>
+      <div class="a4 meme-card">
+        <div class="meme-label">Mahasiswa CS pas denger AI hype</div>
+        <div class="meme-emoji">🤩🚀</div>
+        <div class="meme-text" style="color:var(--text);">"Gacor! Harus bikin<br/>AI app sekarang!"</div>
+        <div style="margin:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 0;font-size:0.75rem;color:var(--gray);">3 bulan kemudian...</div>
+        <div class="meme-emoji">😶</div>
+        <div class="meme-text" style="color:var(--red);">masalahnya apa ya?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 6 : BUILD FOR YOURSELF
+================================================================ -->
+<div class="slide" id="s6" data-notes='{"title":"Build for Yourself – Getting Real","hints":["Referensi: Getting Real dari Basecamp","Konsep: scratch your own itch","Analogi: masak untuk diri sendiri vs nebak selera orang asing","Motivasi lebih tinggi karena lo adalah user-nya sendiri"]}'>
+  <div style="max-width:860px;width:100%;">
+    <div class="tag a1">📖 Getting Real — Basecamp</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Build for <span class="accent">Yourself</span> First</h2>
+    <div class="g2 a3">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="blockquote">
+          "The best software comes from someone who has <strong>scratched their own itch</strong>."
+          <div class="attr">— Getting Real, Basecamp</div>
+        </div>
+        <div class="card">
+          <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Kenapa build for yourself?</div>
+          <ul class="dot-list">
+            <li>Lo paham <span class="hl">pain point</span> secara langsung</li>
+            <li>Ga perlu nebak-nebak kebutuhan user</li>
+            <li>Motivasi lebih kuat — lo adalah user pertamanya</li>
+            <li>Feedback loop paling cepat = diri sendiri</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a4" style="display:flex;flex-direction:column;gap:12px;">
+        <div class="meme-card">
+          <div class="meme-label">Build untuk "everyone"</div>
+          <div class="meme-emoji">😵‍💫</div>
+          <div style="font-size:0.8rem;color:var(--gray);">Nebak kebutuhan orang, asumsi everywhere, rilis 6 bulan, 0 user</div>
+        </div>
+        <div class="meme-card" style="border-color:var(--lime-border);">
+          <div class="meme-label" style="color:var(--lime);">Build untuk diri sendiri</div>
+          <div class="meme-emoji">😎</div>
+          <div class="meme-text" style="color:var(--lime);">You ARE the expert user!</div>
+          <div style="font-size:0.75rem;color:var(--gray);margin-top:6px;">Instant validation. Zero guessing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 7 : CASE STUDY — THE PROBLEM
+================================================================ -->
+<div class="slide" id="s7" data-notes='{"title":"Case Study – The Problem","hints":["Personal story – santai, jangan formal","Mahasiswa pasti relate: apply kerja, bikin CV","Ekspresi capek biar lebih engaging","Lead ke: ini masalah saya sendiri, makanya saya build"]}'>
+  <div style="max-width:860px;width:100%;text-align:center;">
+    <div class="tag a1">📁 Case Study</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Waktu itu, saya punya <span class="accent">masalah kecil...</span></h2>
+    <p class="a3" style="color:var(--gray);margin-bottom:24px;">Yang kayaknya kalian juga pernah rasain 😅</p>
+    <div class="g2 a4" style="text-align:left;">
+      <div class="card" style="border-color:rgba(255,209,102,0.25);background:rgba(255,209,102,0.04);">
+        <div style="font-size:0.72rem;color:var(--yellow);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">😫 Pain Points</div>
+        <ul class="dot-list">
+          <li>Bikin CV ulang tiap apply, capek banget</li>
+          <li>Custom cover letter tiap perusahaan</li>
+          <li>Bingung: skill gue nyambung gak sama JD ini?</li>
+          <li>Apply ke 10 tempat, tracking-nya chaos</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">💡 Pertanyaan Awal</div>
+        <div style="font-size:1.05rem;font-weight:700;line-height:1.5;margin-bottom:12px;">"Apakah AI bisa bantu proses ini jadi lebih cepat dan lebih relevan?"</div>
+        <div style="padding-top:12px;border-top:1px solid var(--border);font-size:0.8rem;color:var(--gray);">Bukan: "Saya mau bikin AI platform untuk industri rekrutmen global"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 8 : THE SIMPLE MVP  (FIXED – skill gap IS included)
+================================================================ -->
+<div class="slide" id="s8" data-notes='{"title":"The Simple MVP","hints":["MVP = paling minimum yang bisa kasih value","Versi ini sudah include skill gap + history data user","Yang belum ada: application tracker, interview simulator, learning roadmap","Focused beats comprehensive di early stage"]}'>
+  <div style="max-width:860px;width:100%;">
+    <div class="tag a1">MVP v0.1</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Keep It <span class="accent">Simple</span> — Seriously</h2>
+    <div class="g2 a3">
+      <div class="card highlight" style="text-align:center;">
+        <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">✅ Yang Sudah Ada di MVP</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="padding:10px;background:var(--bg);border:1px solid var(--lime-border);border-radius:8px;">
+            <div style="font-size:1rem;margin-bottom:2px;">📄 + 📋</div>
+            <div style="font-size:0.82rem;font-weight:600;">CV + Job Description → Cover Letter</div>
+          </div>
+          <div style="padding:10px;background:var(--bg);border:1px solid var(--lime-border);border-radius:8px;">
+            <div style="font-size:1rem;margin-bottom:2px;">🔍</div>
+            <div style="font-size:0.82rem;font-weight:600;">Skill Gap Analyzer</div>
+            <div style="font-size:0.72rem;color:var(--gray);">+ history data user & user preference</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="border-color:rgba(255,85,85,0.2);">
+          <div style="font-size:0.72rem;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">❌ Yang belum dibuat dulu</div>
+          <ul class="dot-list">
+            <li class="bad" style="color:var(--red);">Job application tracker</li>
+            <li class="bad" style="color:var(--red);">Learning roadmap</li>
+            <li class="bad" style="color:var(--red);">AI interview simulator</li>
+            <li class="bad" style="color:var(--red);">Full web dashboard</li>
+          </ul>
+        </div>
+        <div class="card highlight">
+          <div style="font-size:0.85rem;font-weight:600;">Fokus satu pertanyaan:</div>
+          <div style="margin-top:6px;font-size:0.82rem;color:var(--text2);">"Apakah solusi ini bisa <span class="hl">memberikan value</span> sebelum kita build yang lainnya?"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 9 : FIRST DO IT  (+ Agile MVP Illustration)
+================================================================ -->
+<div class="slide" id="s9" data-notes='{"title":"First Do It – Agile MVP Illustration","hints":["Addy Osmani principle – quote James Clear","Ilustrasi: setiap step kasih value, bukan nunggu sempurna","Skateboard = jelek tapi bisa dipakai dan dapat feedback","Mobil = full solution setelah iterasi","Bedain sama waterfall: roda demi roda = user ga bisa kemana-mana sampai mobil jadi"]}'>
+  <div style="max-width:900px;width:100%;text-align:center;">
+    <h2 class="slide-title a1"><span class="accent">First</span> Do It. Then Do It Right. Then Better.</h2>
+    <!-- Agile MVP Illustration -->
+    <div class="a2" style="margin:12px 0;">
+      <div class="mvp-need">🎯 User need: "Saya butuh cara pindah dari titik A ke B"</div>
+      <div class="mvp-track">
+        <div class="mvp-step">
+          <div class="mvp-icon active">🛹</div>
+          <div class="mvp-version">v0.1</div>
+          <div class="mvp-name">Skateboard</div>
+          <div class="mvp-value">Gerak! Dapat feedback langsung</div>
+        </div>
+        <div class="mvp-step">
+          <div class="mvp-icon">🛴</div>
+          <div class="mvp-version">v0.2</div>
+          <div class="mvp-name">Scooter</div>
+          <div class="mvp-value">Lebih cepat, user minta standing</div>
+        </div>
+        <div class="mvp-step">
+          <div class="mvp-icon">🚲</div>
+          <div class="mvp-version">v0.3</div>
+          <div class="mvp-name">Sepeda</div>
+          <div class="mvp-value">Lebih jauh, butuh motor assist</div>
+        </div>
+        <div class="mvp-step">
+          <div class="mvp-icon">🏍️</div>
+          <div class="mvp-version">v0.4</div>
+          <div class="mvp-name">Motor</div>
+          <div class="mvp-value">Kencang! Tapi hujan gimana?</div>
+        </div>
+        <div class="mvp-step">
+          <div class="mvp-icon">🚗</div>
+          <div class="mvp-version">v1.0</div>
+          <div class="mvp-name">Mobil</div>
+          <div class="mvp-value">Full solution dari iterasi nyata</div>
+        </div>
+      </div>
+      <!-- Bad approach -->
+      <div style="margin-top:16px;padding:12px;background:rgba(255,85,85,0.06);border:1px solid rgba(255,85,85,0.2);border-radius:10px;font-size:0.78rem;color:var(--red);">
+        ❌ <strong>Waterfall approach:</strong> &nbsp; 🔩 ban → 🔩 ban → 🔩 ban → 🔩 ban → 🚗 &nbsp; (user menunggu 2 tahun, baru bisa kemana-mana)
+      </div>
+    </div>
+    <div class="blockquote a3" style="max-width:640px;margin:10px auto 0;font-size:0.88rem;">
+      "Start slow if you have to. Start small if you have to. <strong>Just start.</strong>"
+      <div class="attr">— James Clear · via Addy Osmani</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 10 : RELEASE FAST
+================================================================ -->
+<div class="slide" id="s10" data-notes='{"title":"Release Fast, Learn Faster – The CLI Story","hints":["Ceritain dengan santai: gue release, ada yang coba, dapat feedback ini","Insight: bukan masalah AI-nya, tapi UX & accessibility","Kalau ga release cepat, insight ini ga bakal ketauan"]}'>
+  <div style="max-width:860px;width:100%;">
+    <div class="tag a1">Real Story</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Release Fast. <span class="accent">Learn Faster.</span></h2>
+    <div class="g2 a3" style="align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">📤</div>
+          <div><div style="font-weight:700;margin-bottom:4px;font-size:0.9rem;">MVP Dirilis</div><div style="font-size:0.82rem;color:var(--gray);">Simple CLI tool. Dipakai beberapa teman & rekan kerja.</div></div>
+        </div>
+        <div class="card" style="border-color:rgba(255,209,102,0.25);background:rgba(255,209,102,0.04);display:flex;gap:12px;align-items:flex-start;">
+          <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">📩</div>
+          <div><div style="font-weight:700;margin-bottom:6px;font-size:0.9rem;color:var(--yellow);">Feedback Masuk</div><div style="font-size:0.85rem;font-style:italic;color:var(--text2);">"Tools ini menarik, tapi susah dipakai karena harus pakai CLI / AI Code Editor..."</div></div>
+        </div>
+        <div class="card highlight">
+          <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">💡 Insight</div>
+          <div style="font-size:0.9rem;line-height:1.5;">Masalahnya bukan di AI capability.<br/>Masalahnya di <span class="hl">User Experience & Accessibility.</span></div>
+        </div>
+        <div class="blockquote" style="font-size:0.82rem;">"If you don't put your product in front of users, <strong>you are optimizing assumptions.</strong>"</div>
+      </div>
+      <div class="a4 meme-card" style="align-self:start;">
+        <div class="meme-label">Non-technical user disuruhin buka terminal</div>
+        <div class="meme-emoji">😱💻</div>
+        <div style="background:var(--code-bg);border:1px solid var(--lime-border);border-radius:8px;padding:10px;font-family:monospace;font-size:0.75rem;color:var(--lime);text-align:left;margin:10px 0;">
+          $ python app.py --cv resume.pdf<br/>&nbsp;&nbsp;&nbsp;&nbsp;--jd job_desc.txt<br/><span style="color:var(--red);">Error: command not found</span>
+        </div>
+        <div class="meme-text" style="color:var(--red);font-size:0.82rem;">ERROR 404: SANITY NOT FOUND</div>
+        <div style="font-size:0.72rem;color:var(--gray);margin-top:8px;">Kalau ga release, feedback ini ga pernah ketauan 🤷</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 11 : BUILD MEASURE LEARN
+================================================================ -->
+<div class="slide" id="s11" data-notes='{"title":"Build → Measure → Learn Loop","hints":["Lean Startup — tapi jangan terlalu textbook","Ini yang beneran lo lakuin, bukan teori","Setiap iterasi = lebih deket ke product-market fit","Produk berkembang dari user problem, bukan developer assumption"]}'>
+  <div style="text-align:center;max-width:860px;width:100%;">
+    <h2 class="slide-title a1">Product Development = <span class="accent">Loop</span>, Bukan Sekali Jalan</h2>
+    <div class="bml a2" style="margin:28px 0;">
+      <div class="bml-node"><div class="bml-icon">🔨</div><div class="bml-label">Build</div></div>
+      <div class="bml-arrow">→</div>
+      <div class="bml-node"><div class="bml-icon">📊</div><div class="bml-label">Measure</div></div>
+      <div class="bml-arrow">→</div>
+      <div class="bml-node"><div class="bml-icon">🧠</div><div class="bml-label">Learn</div></div>
+      <div class="bml-arrow">→</div>
+      <div class="bml-node" style="border-color:var(--lime-border);"><div class="bml-icon">🔁</div><div class="bml-label" style="color:var(--lime2);">Improve</div></div>
+    </div>
+    <div class="a3" style="padding:18px 24px;background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:12px;max-width:640px;margin:0 auto;">
+      <div style="font-weight:700;font-size:1.05rem;margin-bottom:6px;">Produk berkembang bukan karena</div>
+      <div style="color:var(--gray);font-style:italic;">"developer punya ide fitur"</div>
+      <div style="margin:10px 0;color:var(--gray2);">tapi karena</div>
+      <div style="font-weight:700;font-size:1.05rem;color:var(--lime);">"user memiliki masalah baru"</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 12 : PRODUCT EVOLUTION
+================================================================ -->
+<div class="slide" id="s12" data-notes='{"title":"Product Evolution – Phase by Phase","hints":["Tunjukkan gimana product tumbuh organik dari feedback","Setiap phase = real user feedback, bukan asumsi","Ini bisa jadi model buat hackathon project mereka","Kasih waktu audience baca tiap phase"]}'>
+  <div style="text-align:center;max-width:1000px;width:100%;">
+    <h2 class="slide-title a1">Evolusi dari <span class="accent">Feedback</span>, Bukan Asumsi</h2>
+    <p class="a2" style="color:var(--gray);margin-bottom:20px;font-size:0.85rem;">github.com/ifanzalukhu97/AI-CV-Cover-Letter-Generator</p>
+    <div class="timeline a3" id="phase-timeline">
+      <div class="phase"><div class="phase-num">01</div><div class="phase-label">MVP</div><div class="phase-title">AI CV + Cover Letter + Skill Gap</div><div class="phase-desc">"Gimana buat tailored docs lebih cepat + tau skill mana yang kurang?"</div></div>
+      <div style="display:flex;align-items:center;color:var(--gray2);font-size:1.3rem;flex-shrink:0;">→</div>
+      <div class="phase"><div class="phase-num">02</div><div class="phase-label">User Feedback</div><div class="phase-title">Application Tracker</div><div class="phase-desc">"Gue udah apply kemana aja? Susah tracking-nya"</div></div>
+      <div style="display:flex;align-items:center;color:var(--gray2);font-size:1.3rem;flex-shrink:0;">→</div>
+      <div class="phase"><div class="phase-num">03</div><div class="phase-label">User Feedback</div><div class="phase-title">Learning Roadmap</div><div class="phase-desc">"Dari skill gap ini, belajar apa dulu ya?"</div></div>
+      <div style="display:flex;align-items:center;color:var(--gray2);font-size:1.3rem;flex-shrink:0;">→</div>
+      <div class="phase"><div class="phase-num">04</div><div class="phase-label">User Feedback</div><div class="phase-title">AI Interview Simulator</div><div class="phase-desc">"Ada interview besok, gimana cara prepare-nya?"</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 13 : TRADITIONAL vs AI-DLC
+================================================================ -->
+<div class="slide" id="s13" data-notes='{"title":"Traditional SDLC vs AI-Augmented Lifecycle","hints":["Core unique point dari materi lo","Side-by-side – biar audience visual","AI-Augmented, bukan AI-Replaced","Feedback loop lebih cepat = cost mistake lebih murah"]}'>
+  <div style="text-align:center;max-width:920px;width:100%;">
+    <h2 class="slide-title a1">The Shift in How We <span class="accent">Build</span></h2>
+    <div class="compare a2" style="width:100%;">
+      <div class="compare-col">
+        <div class="compare-header" style="color:var(--gray);">🐌 Traditional SDLC</div>
+        <div class="compare-step">📋 Requirement Gathering</div>
+        <div style="text-align:center;color:var(--gray2);padding:2px;">↓</div>
+        <div class="compare-step">🎨 Design</div>
+        <div style="text-align:center;color:var(--gray2);padding:2px;">↓</div>
+        <div class="compare-step">💻 Development</div>
+        <div style="text-align:center;color:var(--gray2);padding:2px;">↓</div>
+        <div class="compare-step">🧪 Testing</div>
+        <div style="text-align:center;color:var(--gray2);padding:2px;">↓</div>
+        <div class="compare-step">🚀 Release</div>
+        <div style="margin-top:12px;padding:10px;background:rgba(255,85,85,0.06);border-radius:8px;font-size:0.78rem;color:var(--red);text-align:left;">⏱️ Feedback terlambat · 💸 Cost kesalahan mahal</div>
+      </div>
+      <div class="compare-col active-col">
+        <div class="compare-header" style="color:var(--lime);">⚡ AI-Augmented Lifecycle</div>
+        <div class="compare-step lime">🔍 Problem Discovery</div>
+        <div style="text-align:center;color:var(--lime);padding:2px;">↓</div>
+        <div class="compare-step lime">🤖 AI Brainstorming</div>
+        <div style="text-align:center;color:var(--lime);padding:2px;">↓</div>
+        <div class="compare-step lime">🖼️ Rapid Prototype</div>
+        <div style="text-align:center;color:var(--lime);padding:2px;">↓</div>
+        <div class="compare-step lime">📝 Spec Generation</div>
+        <div style="text-align:center;color:var(--lime);padding:2px;">↓</div>
+        <div class="compare-step lime">⚡ AI-Assisted Dev</div>
+        <div style="text-align:center;color:var(--lime);padding:2px;">↓</div>
+        <div class="compare-step lime">🔄 Feedback Loop</div>
+        <div style="margin-top:8px;padding:10px;background:rgba(0,0,0,0.15);border-radius:8px;font-size:0.78rem;color:var(--lime);text-align:left;">⚡ Feedback loop super cepat · 💰 Cost mistake minimal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 14 : DEMO OVERVIEW
+================================================================ -->
+<div class="slide" id="s14" data-notes='{"title":"Demo Overview – Transisi ke Demo Section","hints":["Hype up audience sebelum demo!","4 tools, masing-masing punya role berbeda","Ini bukan tutorial tools, tapi showcase workflow"]}'>
+  <div style="text-align:center;max-width:860px;width:100%;">
+    <div class="tag a1" style="background:var(--lime-bg);">⚡ Live Demo Time</div>
+    <h2 class="slide-title a2" style="margin-top:16px;">AI-Powered <span class="accent">Dev Workflow</span></h2>
+    <p class="a3" style="color:var(--gray);margin-bottom:24px;">4 tools · 4 fase berbeda dalam development lifecycle</p>
+    <div class="g2 a4">
+      <div class="card lime-border" style="display:flex;gap:14px;align-items:flex-start;background:var(--lime-bg);">
+        <div style="font-size:1.6rem;flex-shrink:0;">1️⃣</div>
+        <div><div style="font-weight:700;color:var(--lime);">Vibe Coding</div><div style="font-size:0.82rem;color:var(--gray);margin-top:3px;">AI sebagai thinking partner — explore masalah, bukan langsung ngoding</div></div>
+      </div>
+      <div class="card lime-border" style="display:flex;gap:14px;align-items:flex-start;background:var(--lime-bg);">
+        <div style="font-size:1.6rem;flex-shrink:0;">2️⃣</div>
+        <div><div style="font-weight:700;color:var(--lime);">Figma Make AI</div><div style="font-size:0.82rem;color:var(--gray);margin-top:3px;">Dari ide jadi prototype visual dalam hitungan menit</div></div>
+      </div>
+      <div class="card lime-border" style="display:flex;gap:14px;align-items:flex-start;background:var(--lime-bg);">
+        <div style="font-size:1.6rem;flex-shrink:0;">3️⃣</div>
+        <div><div style="font-weight:700;color:var(--lime);">Kiro — Spec Driven Dev</div><div style="font-size:0.82rem;color:var(--gray);margin-top:3px;">Prototype → Spec → AI-assisted implementation</div></div>
+      </div>
+      <div class="card lime-border" style="display:flex;gap:14px;align-items:flex-start;background:var(--lime-bg);">
+        <div style="font-size:1.6rem;flex-shrink:0;">4️⃣</div>
+        <div><div style="font-weight:700;color:var(--lime);">n8n Automation</div><div style="font-size:0.82rem;color:var(--gray);margin-top:3px;">AI workflow automation setelah product jalan</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 15 : DEMO 1 — VIBE CODING
+================================================================ -->
+<div class="slide" id="s15" data-notes='{"title":"Demo 1 – Vibe Coding","hints":["Buka AI (Claude/ChatGPT/Copilot)","Prompt: Act as product strategist. Challenge my assumptions.","Tunjukkan: AI explore persona, pain points, possible solutions","Key: AI adalah thinking partner, bukan code machine","Jangan minta kode dulu!"]}'>
+  <div style="text-align:center;max-width:780px;width:100%;">
+    <div class="demo-wrap a1">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div><div class="demo-num">01</div><div style="font-size:0.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;">Demo</div></div>
+        <div style="text-align:left;"><div class="demo-title">Vibe Coding</div><div class="demo-sub">AI sebagai Thinking Partner — bukan sekadar Code Generator</div></div>
+      </div>
+      <div class="code-block a2">
+        <div style="color:var(--gray);margin-bottom:8px;font-size:0.72rem;letter-spacing:1px;">💬 EXAMPLE PROMPT</div>
+        <div style="color:var(--lime);">"Act as a product strategist.</div>
+        <div style="color:var(--text2);">I want to build a solution to help people</div>
+        <div style="color:var(--text2);">struggling with job applications.</div>
+        <div style="color:var(--lime2);">Challenge my assumptions</div>
+        <div style="color:var(--text2);">and help me discover what the</div>
+        <div style="color:var(--lime);">real user problem is."</div>
+      </div>
+      <div class="a3" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <div style="padding:8px 14px;background:var(--bg);border:1px solid var(--lime-border);border-radius:8px;font-size:0.8rem;">👤 User personas</div>
+        <div style="padding:8px 14px;background:var(--bg);border:1px solid var(--lime-border);border-radius:8px;font-size:0.8rem;">😫 Pain points</div>
+        <div style="padding:8px 14px;background:var(--bg);border:1px solid var(--lime-border);border-radius:8px;font-size:0.8rem;">💡 Possible solutions</div>
+        <div style="padding:8px 14px;background:var(--bg);border:1px solid var(--lime-border);border-radius:8px;font-size:0.8rem;">🚩 Assumption challenges</div>
+      </div>
+    </div>
+    <div class="a4" style="margin-top:14px;padding:12px 18px;background:rgba(255,209,102,0.06);border:1px solid rgba(255,209,102,0.2);border-radius:8px;font-size:0.83rem;">
+      <span class="hl-yellow">⚠️ Key point:</span> Kalau AI cuma diminta nulis kode, lo kehilangan 80% value-nya. AI paling powerful saat dipakai untuk <span class="hl">explorasi masalah.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 16 : DEMO 2 — FIGMA MAKE
+================================================================ -->
+<div class="slide" id="s16" data-notes='{"title":"Demo 2 – Figma Make AI","hints":["Buka Figma, aktifkan Figma Make","Buat prototype AI Career Companion","Screens: Upload CV → Skill Analysis → Gap View → Learning Recommendation","Key: validate design sebelum nulis satu baris kode"]}'>
+  <div style="text-align:center;max-width:780px;width:100%;">
+    <div class="demo-wrap a1">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div><div class="demo-num">02</div><div style="font-size:0.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;">Demo</div></div>
+        <div style="text-align:left;"><div class="demo-title">Figma Make AI</div><div class="demo-sub">Dari Ide → Prototype Visual dalam Hitungan Menit</div></div>
+      </div>
+      <div class="a2" style="margin-top:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;">
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center;font-size:0.82rem;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">📤</div><div style="color:var(--lime);font-weight:600;font-size:0.78rem;">Upload CV</div>
+        </div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center;font-size:0.82rem;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">🔍</div><div style="color:var(--lime);font-weight:600;font-size:0.78rem;">Skill Analysis</div>
+        </div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center;font-size:0.82rem;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">📊</div><div style="color:var(--lime);font-weight:600;font-size:0.78rem;">Skill Gap</div>
+        </div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:10px;padding:12px 14px;text-align:center;font-size:0.82rem;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">📚</div><div style="color:var(--lime);font-weight:600;font-size:0.78rem;">Learning Path</div>
+        </div>
+      </div>
+      <div class="a3" style="margin-top:14px;padding:12px 16px;background:var(--bg);border-radius:8px;font-size:0.82rem;text-align:left;">
+        🎯 Demo: <span class="hl">AI Career Companion</span> — evolution dari AI CV Generator project
+      </div>
+    </div>
+    <div class="a4" style="margin-top:14px;padding:12px 18px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:0.83rem;text-align:left;">
+      <span class="hl">Why prototype first?</span> <span style="color:var(--gray);">Ubah wireframe lebih murah dari ubah kode. Validasi desain sebelum touch code editor.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 17 : DEMO 3 — KIRO  (+ links)
+================================================================ -->
+<div class="slide" id="s17" data-notes='{"title":"Demo 3 – Kiro Spec-Driven Development","hints":["Buka Kiro IDE — kiro.dev","Dari prototype Figma → generate spec","Tunjukkan: feature spec, user story, acceptance criteria","Key: spec = kontrak dengan AI, output jadi predictable","Analogi: AI seperti intern yang butuh brief yang jelas"]}'>
+  <div style="text-align:center;max-width:780px;width:100%;">
+    <div class="demo-wrap a1">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div><div class="demo-num">03</div><div style="font-size:0.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;">Demo</div></div>
+        <div style="text-align:left;"><div class="demo-title">Kiro — Spec Driven Development</div><div class="demo-sub">Prototype → Spec → AI-Assisted Implementation</div></div>
+      </div>
+      <div class="code-block a2">
+        <div style="color:var(--gray);margin-bottom:8px;font-size:0.72rem;letter-spacing:1px;">📄 GENERATED SPEC EXAMPLE</div>
+        <div><span style="color:var(--lime);">Feature:</span> <span style="color:var(--text2);">Skill Gap Analyzer</span></div>
+        <div><span style="color:var(--lime);">User:</span> <span style="color:var(--text2);">Job seeker</span></div>
+        <div><span style="color:var(--lime);">Goal:</span> <span style="color:var(--text2);">Understand missing skills vs target role</span></div>
+        <div style="margin-top:6px;"><span style="color:var(--lime);">Acceptance Criteria:</span></div>
+        <div style="color:var(--gray);padding-left:12px;">✓ User can upload CV</div>
+        <div style="color:var(--gray);padding-left:12px;">✓ User can select target role</div>
+        <div style="color:var(--gray);padding-left:12px;">✓ System analyzes missing skills</div>
+        <div style="color:var(--gray);padding-left:12px;">✓ System generates learning recommendation</div>
+      </div>
+      <!-- Kiro reference links -->
+      <div class="a3" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
+        <a class="link-chip" href="https://kiro.dev" target="_blank">🌐 kiro.dev</a>
+        <a class="link-chip" href="https://kiro.dev/docs/specs/" target="_blank">📖 Docs: Specs</a>
+        <a class="link-chip" href="https://kiro.dev/blog/introducing-kiro/" target="_blank">📝 Blog: Introducing Kiro</a>
+      </div>
+    </div>
+    <div class="a4 g2" style="margin-top:14px;">
+      <div class="meme-card">
+        <div class="meme-label">AI tanpa spec</div>
+        <div class="meme-emoji">🤡</div>
+        <div style="font-size:0.78rem;color:var(--gray);font-family:sans-serif;">"Bikinin app" → hallucinate, kode berantakan</div>
+      </div>
+      <div class="meme-card" style="border-color:var(--lime-border);">
+        <div class="meme-label" style="color:var(--lime);">AI dengan spec yang jelas</div>
+        <div class="meme-emoji">🎯</div>
+        <div style="font-size:0.78rem;color:var(--text2);font-family:sans-serif;">Output predictable, dalam batasan yang disepakati.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 18 : DEMO 4 — N8N
+================================================================ -->
+<div class="slide" id="s18" data-notes='{"title":"Demo 4 – n8n Automation","hints":["Demo live: n8n workflow","Flow: Job Application → Google Sheet → n8n trigger → AI analyze JD → Update skill gap","Key: AI automation extend value product","Optional: kalau waktu habis, tunjukkan screenshot"]}'>
+  <div style="text-align:center;max-width:780px;width:100%;">
+    <div class="demo-wrap a1">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div><div class="demo-num">04</div><div style="font-size:0.68rem;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;">Demo</div></div>
+        <div style="text-align:left;"><div class="demo-title">n8n — AI Workflow Automation</div><div class="demo-sub">Setelah product jalan, AI automation extends its value</div></div>
+      </div>
+      <div class="a2" style="margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;">
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center;"><div style="font-size:1rem;">📋</div><div style="color:var(--lime);font-size:0.7rem;font-weight:600;margin-top:2px;">Job Submitted</div></div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center;"><div style="font-size:1rem;">📊</div><div style="color:var(--lime);font-size:0.7rem;font-weight:600;margin-top:2px;">Google Sheet</div></div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:10px;padding:10px 12px;text-align:center;"><div style="font-size:1rem;">⚡</div><div style="color:var(--lime);font-size:0.7rem;font-weight:600;margin-top:2px;">n8n Trigger</div></div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center;"><div style="font-size:1rem;">🤖</div><div style="color:var(--lime);font-size:0.7rem;font-weight:600;margin-top:2px;">AI Analyze JD</div></div>
+        <div style="color:var(--gray2);">→</div>
+        <div style="background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:10px;padding:10px 12px;text-align:center;"><div style="font-size:1rem;">📈</div><div style="color:var(--lime);font-size:0.7rem;font-weight:600;margin-top:2px;">Update Skill Gap</div></div>
+      </div>
+      <div class="a3" style="margin-top:14px;padding:12px 16px;background:var(--bg);border-radius:8px;font-size:0.82rem;text-align:left;">n8n = glue antara semua tools dan AI — automation tanpa nulis backend dari scratch</div>
+    </div>
+    <div class="a4" style="margin-top:12px;padding:12px 18px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:0.83rem;text-align:left;">
+      <span class="hl">Key insight:</span> <span style="color:var(--gray);">AI tidak hanya membantu build aplikasi. AI juga membantu build <strong style="color:var(--text);">workflow</strong> yang connect semuanya.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 19 : AI ≠ REPLACE ENGINEERING
+================================================================ -->
+<div class="slide" id="s19" data-notes='{"title":"AI ≠ Replace Engineering Discipline","hints":["Penting untuk diluruskan","AI nulis syntax, tapi engineering judgment tetap di tangan kita","Tanya: siapa yang mikirin architecture? security? maintainability?","AI mempercepat loop, judgment tetap milik manusia"]}'>
+  <div style="max-width:860px;width:100%;">
+    <div class="a1" style="display:inline-block;background:rgba(255,85,85,0.08);border:1px solid rgba(255,85,85,0.2);border-radius:8px;padding:6px 14px;font-size:0.75rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Perlu Diluruskan</div>
+    <h2 class="slide-title a2">AI <span style="color:var(--red);">bukan berarti</span><br/>Engineering Discipline Tidak Penting</h2>
+    <div class="g2 a3" style="margin-top:4px;">
+      <div class="card">
+        <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">🤖 Yang bisa AI lakukan:</div>
+        <ul class="dot-list">
+          <li class="good">Nulis syntax dengan cepat</li>
+          <li class="good">Generate boilerplate code</li>
+          <li class="good">Bantu debugging & refactoring</li>
+          <li class="good">Eksplorasi solusi teknis</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">👨‍💻 Yang tetap butuh manusia:</div>
+        <ul class="dot-list">
+          <li>Architecture decisions</li>
+          <li>Security & data protection</li>
+          <li>Scalability design</li>
+          <li>Maintainability & tech debt</li>
+          <li>Validasi solusi vs real problem</li>
+        </ul>
+      </div>
+    </div>
+    <div class="blockquote a4" style="margin-top:16px;">AI mempercepat <strong>loop-nya</strong>. Tapi <strong>engineering judgment</strong> tetap ada di tangan kalian.<div class="attr">Ini yang membuat kalian tidak tergantikan</div></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 20 : EMPATHY
+================================================================ -->
+<div class="slide" id="s20" data-notes='{"title":"Empathy is Your Superpower","hints":["Emotional high point","Tanya: apa yang AI tidak bisa lakukan?","Analogi dokter-pasien: dengerin keluhan ≠ langsung ikutin request","Di era AI, problem-finder > code-writer"]}'>
+  <div style="text-align:center;max-width:800px;width:100%;">
+    <p class="a1" style="color:var(--gray);margin-bottom:12px;">Di era AI, competitive advantage kamu adalah...</p>
+    <h1 class="slide-title a2" style="font-size:clamp(3rem,7vw,5.5rem);color:var(--lime);letter-spacing:-1px;">Empathy</h1>
+    <div class="a3 g2" style="margin-top:24px;text-align:left;">
+      <div class="card">
+        <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🤖 AI bisa...</div>
+        <ul class="dot-list" style="color:var(--gray);">
+          <li style="color:var(--gray);">Nulis frontend component dalam 5 detik</li>
+          <li style="color:var(--gray);">Setup database tanpa keringat</li>
+          <li style="color:var(--gray);">Generate ratusan baris kode</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">👥 Yang hanya manusia bisa...</div>
+        <ul class="dot-list">
+          <li>Ngerasain frustrasi user secara langsung</li>
+          <li>Duduk & dengerin keluh kesah user</li>
+          <li>Tahu fitur mana yang benar-benar bernilai</li>
+        </ul>
+      </div>
+    </div>
+    <div class="blockquote a4" style="margin-top:16px;font-size:0.88rem;">Pasien minta obat sakit kepala. Kalau dokter langsung kasih — sembuh sementara. Ternyata penyebabnya lebih serius. <strong>Dengerin keluhannya. Diagnosa masalah sebenarnya.</strong><div class="attr">— Addy Osmani, User-Centric Engineering</div></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 21 : HACKATHON FRAMEWORK
+================================================================ -->
+<div class="slide" id="s21" data-notes='{"title":"Hackathon Framework","hints":["Practical takeaway langsung bisa dipakai","Ini yang bisa mereka bawa pulang dari sesi ini","Ini bukan teori, ini yang beneran works"]}'>
+  <div style="text-align:center;max-width:960px;width:100%;">
+    <div class="tag a1">Practical Takeaway</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Your <span class="accent">Hackathon Framework</span></h2>
+    <div class="g3 a3">
+      <div class="card" style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🔍</div><div style="font-weight:700;font-size:0.88rem;color:var(--lime);margin-bottom:4px;">Step 1</div><div style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">Find the Real Problem</div><div style="font-size:0.75rem;color:var(--gray);">Validasi dulu. Siapa yang suffer dari masalah ini?</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🤖</div><div style="font-weight:700;font-size:0.88rem;color:var(--lime);margin-bottom:4px;">Step 2</div><div style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">Vibe Coding: Explore</div><div style="font-size:0.75rem;color:var(--gray);">Chat AI untuk brainstorm & challenge asumsi</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🖼️</div><div style="font-weight:700;font-size:0.88rem;color:var(--lime);margin-bottom:4px;">Step 3</div><div style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">Prototype Fast</div><div style="font-size:0.75rem;color:var(--gray);">Figma Make / Figma sebelum nulis kode</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">📝</div><div style="font-weight:700;font-size:0.88rem;color:var(--lime);margin-bottom:4px;">Step 4</div><div style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">Write the Spec</div><div style="font-size:0.75rem;color:var(--gray);">Feature, user, acceptance criteria. Baru kasih AI.</div></div>
+      <div class="card" style="text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🚀</div><div style="font-weight:700;font-size:0.88rem;color:var(--lime);margin-bottom:4px;">Step 5</div><div style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">Ship Something Working</div><div style="font-size:0.75rem;color:var(--gray);">Sedikit fitur tapi jalan > banyak fitur tapi broken</div></div>
+      <div class="card lime-border" style="text-align:center;background:var(--lime-bg);"><div style="font-size:1.5rem;margin-bottom:8px;">🫀</div><div style="font-weight:700;font-size:0.88rem;color:var(--lime);margin-bottom:4px;">Always</div><div style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">Stay User-Centric</div><div style="font-size:0.75rem;color:var(--gray);">Juri = user pertama kalian. Solve their pain.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 22 : STUDENT BENEFITS (NEW)
+================================================================ -->
+<div class="slide" id="s22" data-notes='{"title":"Student Benefits – Unlock Yang Kalian Punya","hints":["Bonus slide untuk mahasiswa – ini privilege yang banyak ga tau","Kiro for Students: gratis akses Kiro IDE","GitHub Student Pack: $200k+ worth of tools gratis","JetBrains Pack: IntelliJ, WebStorm, dll gratis selama mahasiswa","Manfaatin ini sebelum lulus!","Sambil build project untuk hackathon, aktivasi dulu ini semua"]}'>
+  <div style="max-width:900px;width:100%;">
+    <div class="tag a1">🎓 Bonus untuk Mahasiswa</div>
+    <h2 class="slide-title a2" style="margin-top:12px;">Sebagai Student, Kalian Punya <span class="accent">Banyak Privilege</span></h2>
+    <p class="a3" style="color:var(--gray);margin-bottom:20px;">Tools professional yang bisa kalian unlock secara gratis — manfaatin sebelum lulus!</p>
+    <div style="display:flex;flex-direction:column;gap:14px;width:100%;" class="a4">
+      <div class="student-card">
+        <div class="student-card-icon">⚡</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+            <div style="font-weight:700;font-size:1rem;">Kiro for Students</div>
+            <div class="student-card-badge">FREE</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--gray);margin-bottom:8px;">Akses Kiro IDE — Spec Driven Development tool — gratis untuk mahasiswa aktif</div>
+          <a class="link-chip" href="https://kiro.dev/students/" target="_blank">🔗 kiro.dev/students/</a>
+        </div>
+      </div>
+      <div class="student-card">
+        <div class="student-card-icon">🐙</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+            <div style="font-weight:700;font-size:1rem;">GitHub Student Developer Pack</div>
+            <div class="student-card-badge">$200k+ VALUE</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--gray);margin-bottom:8px;">GitHub Copilot, domain gratis, cloud credits, dan 100+ tools premium gratis selama mahasiswa</div>
+          <a class="link-chip" href="https://education.github.com/pack" target="_blank">🔗 education.github.com/pack</a>
+        </div>
+      </div>
+      <div class="student-card">
+        <div class="student-card-icon">🧠</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;">
+            <div style="font-weight:700;font-size:1rem;">JetBrains Student Pack</div>
+            <div class="student-card-badge">ALL IDEs FREE</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--gray);margin-bottom:8px;">IntelliJ IDEA, WebStorm, PyCharm, DataGrip, dan semua JetBrains IDE gratis selama mahasiswa aktif</div>
+          <a class="link-chip" href="https://www.jetbrains.com/academy/student-pack/" target="_blank">🔗 jetbrains.com/academy/student-pack/</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 23 : CLOSING
+================================================================ -->
+<div class="slide" id="s23" data-notes='{"title":"Closing – The Advantage","hints":["Pause panjang sebelum baca ini","Biarkan meresap","Tanya: apakah kalian cuma mau jadi fast coder?","Call to action: mulai dari masalah kalian sendiri, sekarang"]}'>
+  <div style="text-align:center;max-width:800px;width:100%;">
+    <p class="a1" style="color:var(--gray);margin-bottom:6px;">Di era AI, membuat software jadi lebih cepat.</p>
+    <p class="a2" style="color:var(--gray);margin-bottom:24px;">Semua orang bisa build faster.</p>
+    <div class="a3" style="background:var(--card-bg);border:1px solid var(--lime-border);border-radius:18px;padding:36px 40px;margin:0 auto 24px;">
+      <div style="font-size:clamp(0.9rem,2vw,1.1rem);color:var(--gray);margin-bottom:14px;">The biggest advantage is knowing:</div>
+      <div style="font-size:clamp(1.4rem,4vw,2.8rem);font-weight:900;line-height:1.35;">
+        <span class="accent">What</span> to build.<br/>
+        <span class="accent">Why</span> it matters.<br/>
+        <span class="accent">How</span> to learn from users.
+      </div>
+    </div>
+    <div class="a4" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <div style="padding:10px 18px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:0.83rem;">🌱 Mulai dari masalah kamu sendiri</div>
+      <div style="padding:10px 18px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:0.83rem;">🚀 Ship MVP, iterasi dari feedback</div>
+      <div style="padding:10px 18px;background:var(--lime-bg);border:1px solid var(--lime-border);border-radius:8px;font-size:0.83rem;color:var(--lime);">🫀 Empathy over features</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SLIDE 24 : Q&A
+================================================================ -->
+<div class="slide" id="s24" data-notes='{"title":"Q&A / Diskusi","hints":["Open floor","Common Q: Gimana mulai kalau belum punya idea? → Cari masalah sehari-hari lo","Common Q: AI mana paling bagus? → Sesuai use case, semua bisa","Common Q: Gimana kalau tim ga bisa coding? → Vibe coding + no-code tools","Closing: terima kasih, selamat berhackathon!"]}'>
+  <div style="text-align:center;max-width:800px;width:100%;">
+    <h1 class="slide-title a1" style="font-size:clamp(2.5rem,7vw,5rem);">Q&A 🙋</h1>
+    <p class="a2" style="color:var(--gray);margin-bottom:24px;font-size:1.1rem;">Ada yang mau ditanyakan atau didiskusikan?</p>
+    <div class="g2 a3" style="text-align:left;">
+      <div class="card">
+        <div style="font-size:0.72rem;color:var(--yellow);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">💡 Kemungkinan pertanyaan</div>
+        <ul class="dot-list">
+          <li>Gimana mulai kalau belum punya ide?</li>
+          <li>AI coding tool mana yang paling bagus?</li>
+          <li>Gimana kalau tim gak bisa coding?</li>
+          <li>Seberapa penting MVP untuk hackathon?</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <div style="font-size:0.72rem;color:var(--lime);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">📱 Connect with Me</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a class="link-chip" href="https://github.com/ifanzalukhu97" target="_blank">💻 github.com/ifanzalukhu97</a>
+          <a class="link-chip" href="https://linkedin.com/in/ifanzalukhu97" target="_blank">💼 linkedin.com/in/ifanzalukhu97</a>
+          <a class="link-chip" href="https://medium.com/@ifanzalukhu97" target="_blank">✍️ medium.com/@ifanzalukhu97</a>
+        </div>
+        <div style="margin-top:12px;padding:10px;background:var(--bg);border-radius:8px;font-size:0.78rem;">
+          Project: <span class="hl">AI CV Cover Letter Generator</span><br/>
+          <span style="color:var(--gray);">Open source on GitHub</span>
+        </div>
+      </div>
+    </div>
+    <div class="a4" style="margin-top:20px;font-size:1.1rem;font-weight:700;">
+      Selamat berhackathon! 🚀 <span class="accent">Build something that matters.</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- end #deck -->
+
+<!-- CONTROLS -->
+<div id="nav">
+  <button class="nav-btn" id="btn-prev">←</button>
+  <button class="nav-btn" id="btn-next">→</button>
+  <button class="nav-btn" id="btn-notes" title="Notes (N)">🎤</button>
+  <button class="nav-btn" id="btn-theme" title="Toggle Light/Dark (L)">☀️</button>
+</div>
+<div id="slide-info">1 / 24</div>
+
+<!-- NOTES PANEL -->
+<div id="notes">
+  <div id="notes-header">🎤 Speaker Hints</div>
+  <div id="notes-body"></div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const info   = document.getElementById('slide-info');
+const bar    = document.getElementById('progress');
+const panel  = document.getElementById('notes');
+const nbody  = document.getElementById('notes-body');
+const btnTheme = document.getElementById('btn-theme');
+let cur = 0, notesOpen = false, isLight = false;
+
+function goTo(n){
+  if(n < 0 || n >= slides.length) return;
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('out');
+  const prev = cur;
+  setTimeout(()=>{ slides[prev].classList.remove('out'); }, 440);
+  cur = n;
+  slides[cur].classList.add('active');
+  info.textContent = (cur+1)+' / '+slides.length;
+  bar.style.width = ((cur+1)/slides.length*100)+'%';
+  updateNotes();
+  if(slides[cur].id==='s12') setTimeout(animPhases,300);
+}
+
+function updateNotes(){
+  const raw = slides[cur].getAttribute('data-notes');
+  if(!raw) return;
+  const d = JSON.parse(raw);
+  let h = `<div class="hint"><strong>${d.title}</strong></div>`;
+  (d.hints||[]).forEach(t=>{ h+=`<div class="point">▸ ${t}</div>`; });
+  nbody.innerHTML = h;
+}
+
+function toggleNotes(){
+  notesOpen=!notesOpen;
+  panel.classList.toggle('open',notesOpen);
+}
+
+function toggleTheme(){
+  isLight=!isLight;
+  document.body.classList.toggle('light',isLight);
+  btnTheme.textContent = isLight ? '🌙' : '☀️';
+  btnTheme.title = isLight ? 'Switch to Dark (L)' : 'Switch to Light (L)';
+}
+
+function animPhases(){
+  document.querySelectorAll('.phase').forEach((p,i)=>{
+    setTimeout(()=>{ p.classList.add('visible'); },i*200);
+  });
+}
+
+// Hover glow on MVP steps
+document.querySelectorAll('.mvp-icon').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ el.style.borderColor='var(--lime)'; el.style.background='var(--lime-bg)'; });
+  el.addEventListener('mouseleave',()=>{
+    if(!el.classList.contains('active')){ el.style.borderColor=''; el.style.background=''; }
+  });
+});
+
+updateNotes();
+bar.style.width = (1/slides.length*100)+'%';
+
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight',' '].includes(e.key)){ e.preventDefault(); goTo(cur+1); }
+  if(e.key==='ArrowLeft'){ e.preventDefault(); goTo(cur-1); }
+  if(e.key.toLowerCase()==='n') toggleNotes();
+  if(e.key.toLowerCase()==='l') toggleTheme();
+  if(e.key.toLowerCase()==='f'){
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+    else document.exitFullscreen?.();
+  }
+});
+
+document.getElementById('btn-next').onclick  = ()=>goTo(cur+1);
+document.getElementById('btn-prev').onclick  = ()=>goTo(cur-1);
+document.getElementById('btn-notes').onclick = toggleNotes;
+btnTheme.onclick = toggleTheme;
+
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){ dx<0?goTo(cur+1):goTo(cur-1); }
+},{passive:true});
+</script>
+</body>
+</html>

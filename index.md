@@ -67,6 +67,17 @@ I'm particularly enthusiastic about how AI can be applied practically inside dev
 
 ---
 
+### 📑 Recent Slides
+
+{% assign sorted_slides = site.slides | sort: "date" | reverse %}
+{% for slide in sorted_slides limit:4 %}
+- **[{{ slide.title }}]({{ slide.url }})** — {{ slide.event }} ({{ slide.date | date: "%b %Y" }})
+{% endfor %}
+
+[→ View all slides](slides/)
+
+---
+
 ### 🔗 Connect with me
 
 | Platform | Link |
