@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ifan Zalukhu — Senior .NET Backend Engineer & AWS Community Builder</title>
-  <meta name="description" content="Ifan Jaya Suswanto Zalukhu — Senior C# .NET Backend Engineer, AWS Community Builder, AI & Automation Enthusiast. Building scalable systems and leading engineering teams.">
+
+  <title>Ifan Zalukhu — Senior .NET Backend Engineer &amp; AWS Community Builder</title>
+  <meta name="description" content="Ifan Jaya Suswanto Zalukhu — Senior C# .NET Backend Engineer, Head of Engineering at SimpliDOTS, AWS Community Builder. Building scalable systems and leading engineering teams.">
   <meta name="keywords" content="Ifan Zalukhu, .NET Backend Engineer, AWS Community Builder, C# Developer, AI Automation, Head of Engineering">
   <link rel="canonical" href="https://www.ifanzalukhu97.com/">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Ifan Zalukhu — Senior .NET Backend Engineer & AWS Community Builder">
-  <meta property="og:description" content="Building scalable backend systems. Leading engineering teams. Exploring AI & automation.">
-  <meta property="og:url" content="https://www.ifanzalukhu97.com/">
-  <meta property="og:image" content="https://github.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/raw/master/images/simplidots-image.jpg">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Ifan Zalukhu">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Ifan Zalukhu — Senior .NET Backend Engineer & AWS Community Builder">
-  <meta name="twitter:description" content="Building scalable backend systems. Leading engineering teams. Exploring AI & automation.">
+  <meta property="og:url" content="https://www.ifanzalukhu97.com/">
+  <meta property="og:title" content="Ifan Zalukhu — Senior .NET Backend Engineer &amp; AWS Community Builder">
+  <meta property="og:description" content="Building scalable backend systems. Leading engineering teams. Exploring AI &amp; automation.">
+  <meta property="og:image" content="https://github.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/raw/master/images/simplidots-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ifan Zalukhu — Senior .NET Backend Engineer &amp; AWS Community Builder">
+  <meta name="twitter:description" content="Building scalable backend systems. Leading engineering teams. Exploring AI &amp; automation.">
   <meta name="twitter:image" content="https://github.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/raw/master/images/simplidots-image.jpg">
 
-  <!-- JSON-LD Structured Data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -30,20 +31,17 @@
     "name": "Ifan Jaya Suswanto Zalukhu",
     "alternateName": "ifanzalukhu97",
     "jobTitle": "Head of Engineering",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "SimpliDOTS"
-    },
+    "worksFor": { "@type": "Organization", "name": "SimpliDOTS" },
     "url": "https://www.ifanzalukhu97.com/",
     "image": "https://github.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/raw/master/images/simplidots-image.jpg",
     "email": "ivan.zalukhu97@gmail.com",
-    "description": "Senior C# .NET Backend Engineer, AWS Community Builder, AI & Automation Enthusiast",
-    "knowsAbout": ["C#", ".NET", "Microservices", "AWS", "Azure", "AI", "Workflow Automation"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Medan", "addressCountry": "ID" },
+    "knowsAbout": ["C#", ".NET", "ASP.NET Core", "Microservices", "AWS", "Azure", "AI Automation"],
     "sameAs": [
       "https://linkedin.com/in/ifanzalukhu97",
+      "https://github.com/ifanzalukhu97",
       "https://dev.to/ifanzalukhu97",
       "https://medium.com/@ifanzalukhu97",
-      "https://github.com/ifanzalukhu97",
       "https://builder.aws.com/community/@ifanzalukhu97",
       "https://daily.dev/ifanzalukhu97",
       "https://www.credly.com/users/ifanzalukhu97",
@@ -55,595 +53,457 @@
   </script>
 
   <style>
-    /* CSS Custom Properties */
     :root {
       --bg-primary: #0d1117;
       --bg-secondary: #161b22;
-      --bg-tertiary: #1c2128;
+      --bg-tertiary: #10151c;
       --accent: #aaff00;
       --accent-hover: #88cc00;
       --text-primary: #e6edf3;
+      --text-bright: #f0f6fc;
       --text-secondary: #8b949e;
-      --border: #30363d;
+      --text-muted: #6e7681;
+      --border: #21262d;
+      --border-strong: #30363d;
       --radius-card: 12px;
       --radius-pill: 20px;
       --radius-btn: 8px;
-      --max-width: 900px;
+      --max-width: 1120px;
+      --gutter: 40px;
+      --rail: 240px;
+      --font-sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+      --font-display: "Instrument Serif", Georgia, serif;
     }
 
-    /* CSS Reset */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background-color: var(--bg-primary);
+      margin: 0;
+      background: var(--bg-primary);
       color: var(--text-primary);
-      line-height: 1.6;
+      font-family: var(--font-sans);
       font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.55;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    a { color: var(--text-primary); text-decoration: none; transition: color .15s ease, border-color .15s ease; }
+    a:hover { color: var(--accent); }
+    img { max-width: 100%; }
+    ::selection { background: rgba(170, 255, 0, .22); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* ---------- Layout primitives ---------- */
+
+    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+
+    section.band { border-top: 1px solid var(--border); padding: 80px 0; }
+    section.band.alt { background: var(--bg-tertiary); }
+
+    /* Two-column editorial grid: mono section label on the rail, content on the right */
+    .split { display: grid; grid-template-columns: var(--rail) 1fr; gap: 64px; }
+    .split.align-end { align-items: end; }
+
+    .section-label {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.2s ease;
+    .section-intro { margin: 0; max-width: 52ch; font-size: 16.5px; line-height: 1.65; color: var(--text-secondary); }
+
+    .lede {
+      margin: 0 0 26px;
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1.32;
+      letter-spacing: -.015em;
+      color: var(--text-bright);
+      max-width: 30ch;
+      text-wrap: pretty;
     }
 
-    a:hover {
-      color: var(--accent-hover);
-    }
+    .mono-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
 
-    /* Layout */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    /* ---------- Header ---------- */
 
-    section {
-      padding: 80px 0;
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(13, 17, 23, .82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
     }
+    .site-header .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .wordmark { display: flex; align-items: baseline; gap: 10px; }
+    .wordmark strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: -.01em; }
+    .wordmark span { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-secondary); }
 
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 32px;
+    .site-nav { display: flex; align-items: center; gap: 26px; font-size: 13.5px; color: var(--text-secondary); }
+    .site-nav .nav-links { display: flex; align-items: center; gap: 26px; }
+    .site-nav a { color: inherit; }
+    .site-nav .nav-cta {
+      padding: 9px 18px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-btn);
+      font-size: 13px;
       color: var(--text-primary);
     }
+    .site-nav .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
 
-    .section-title .accent {
-      color: var(--accent);
-    }
+    /* Mobile menu toggle */
+    .nav-toggle { display: none; background: none; border: none; padding: 8px; cursor: pointer; color: var(--text-primary); }
+    .nav-toggle svg { display: block; }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 100px 0 80px;
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 30;
+      background: rgba(13, 17, 23, .96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
     }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 28px; color: var(--text-primary);
+      letter-spacing: -.01em;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .nav-cta {
+      margin-top: 16px; padding: 14px 28px; border: 1px solid var(--border-strong);
+      border-radius: var(--radius-btn); font-family: var(--font-sans); font-size: 14px;
+    }
+    .mobile-close {
+      position: absolute; top: 20px; right: 24px; background: none; border: none;
+      color: var(--text-primary); cursor: pointer; padding: 8px;
+    }
+    .mobile-close svg { display: block; }
 
-    .hero .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 3px solid var(--accent);
-      object-fit: cover;
-      margin: 0 auto 24px;
+    /* ---------- Hero ---------- */
+
+    .hero { padding: 96px 0 84px; }
+    .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; align-items: end; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 26px;
     }
+    .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
     .hero h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 12px;
+      margin: 0 0 24px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 76px;
+      line-height: 1.03;
+      letter-spacing: -.025em;
+      color: var(--text-bright);
     }
+    .tagline { margin: 0 0 36px; max-width: 48ch; font-size: 18.5px; line-height: 1.65; color: var(--text-secondary); text-wrap: pretty; }
 
-    .hero .tagline {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .cta-group {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
+    .cta-group { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
     .btn-primary {
-      display: inline-block;
-      padding: 12px 28px;
-      background-color: var(--accent);
-      color: var(--bg-primary);
-      font-weight: 700;
-      border-radius: var(--radius-btn);
-      transition: background-color 0.2s ease, transform 0.2s ease;
+      padding: 14px 26px; background: var(--accent); color: var(--bg-primary);
+      border-radius: var(--radius-btn); font-size: 14.5px; font-weight: 500;
     }
-
-    .btn-primary:hover {
-      background-color: var(--accent-hover);
-      color: var(--bg-primary);
-      transform: translateY(-1px);
-    }
-
+    .btn-primary:hover { background: var(--accent-hover); color: var(--bg-primary); }
     .btn-secondary {
-      display: inline-block;
-      padding: 12px 28px;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-weight: 700;
-      border-radius: var(--radius-btn);
-      transition: background-color 0.2s ease, transform 0.2s ease;
+      padding: 14px 26px; border: 1px solid var(--border-strong);
+      border-radius: var(--radius-btn); font-size: 14.5px; color: var(--text-primary);
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid var(--border); padding-top: 26px; }
+    .stats dt { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--text-bright); }
+    .stats dd {
+      margin: 6px 0 0; font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted);
     }
 
-    .btn-secondary:hover {
-      background-color: rgba(170, 255, 0, 0.1);
-      transform: translateY(-1px);
+    .portrait {
+      width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block;
+      border-radius: var(--radius-card); border: 1px solid var(--border-strong); background: var(--bg-secondary);
     }
+    .portrait-note { margin: 14px 0 0; font-family: var(--font-mono); font-size: 11px; line-height: 1.7; color: var(--text-muted); }
 
-    /* About */
-    .about p {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      max-width: 750px;
-    }
+    /* ---------- About ---------- */
 
-    .about .highlight {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
+    .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; max-width: 760px; }
+    .about-cols p { margin: 0; font-size: 15.5px; line-height: 1.78; color: var(--text-secondary); text-wrap: pretty; }
 
-    /* Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+    /* ---------- Cards (What I Do) ---------- */
 
+    .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .card {
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 24px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 34px;
     }
-
-    .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .card .card-icon {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-    }
-
+    .card:hover { border-color: var(--border-strong); }
+    .card-index { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .card-index span { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+    .card-index i { flex: 1; height: 1px; background: var(--border); }
     .card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
+      margin: 0 0 12px; font-family: var(--font-display); font-weight: 400;
+      font-size: 26px; letter-spacing: -.01em; color: var(--text-bright);
     }
+    .card p { margin: 0 0 20px; font-size: 15px; line-height: 1.7; color: var(--text-secondary); text-wrap: pretty; }
+    .card .card-tech { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: var(--text-muted); }
 
-    .card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+    /* ---------- Speaking ---------- */
 
-    /* Photo Grid */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
+    .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .photo-grid figure { margin: 0; }
     .photo-grid img {
-      border-radius: var(--radius-card);
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s ease;
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+      border-radius: var(--radius-card); border: 1px solid var(--border); background: var(--bg-secondary);
     }
+    .photo-grid figcaption { margin-top: 10px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .06em; color: var(--text-muted); }
 
-    .photo-grid img:hover {
-      border-color: var(--accent);
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      font-size: 0.85rem;
-      color: var(--text-primary);
+      padding: 10px 18px; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 11.5px;
+      letter-spacing: .04em; color: var(--text-secondary);
     }
+    .badge-link { border-color: var(--border-strong); color: var(--text-primary); }
+    .badge-link:hover { border-color: var(--accent); color: var(--accent); }
 
-    .badge-link {
-      text-decoration: none;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-      cursor: pointer;
-    }
+    /* ---------- Articles + slides ---------- */
 
-    .badge-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    /* Articles */
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
+    .articles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
     .article-card {
-      display: block;
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 20px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-      color: var(--text-primary);
+      display: block; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 26px;
     }
-
-    .article-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      color: var(--text-primary);
+    .article-card:hover { border-color: var(--accent); }
+    .article-card .article-meta { margin-bottom: 12px; }
+    .article-card .article-title {
+      font-family: var(--font-display); font-size: 22px; line-height: 1.28;
+      letter-spacing: -.01em; color: var(--text-bright);
     }
-
-    .article-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      line-height: 1.4;
+    .articles-fallback {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-card);
+      padding: 28px; margin-bottom: 24px; font-size: 15px; color: var(--text-secondary);
     }
+    .articles-fallback a { color: var(--accent); }
 
-    .article-card .article-meta {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .read-more-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
+    .read-more-links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
     .read-more-links a {
-      padding: 8px 20px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-btn);
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      transition: border-color 0.2s ease, color 0.2s ease;
+      padding: 10px 18px; border: 1px solid var(--border-strong);
+      border-radius: var(--radius-btn); font-size: 13px; color: var(--text-primary);
     }
+    .read-more-links a:hover { border-color: var(--accent); color: var(--accent); }
 
-    .read-more-links a:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Slides */
-    .slides-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .subhead { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
 
     .slide-item {
-      display: block;
-      padding: 16px 20px;
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      transition: border-color 0.2s ease;
-      color: var(--text-primary);
+      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: baseline;
+      padding: 22px 0; border-bottom: 1px solid var(--border);
     }
+    .slide-item:hover { background: #12181f; }
+    .slide-title { font-family: var(--font-display); font-size: 23px; letter-spacing: -.01em; line-height: 1.25; color: var(--text-bright); }
+    .slide-event { margin-top: 6px; font-size: 14px; color: var(--text-secondary); }
+    .slide-date { white-space: nowrap; }
 
-    .slide-item:hover {
-      border-color: var(--accent);
-      color: var(--text-primary);
+    /* ---------- Tech stack ---------- */
+
+    .tech-category { padding: 20px 0; border-top: 1px solid var(--border); }
+    .tech-category h3 { margin: 0; font-size: 14.5px; font-weight: 500; color: var(--text-primary); }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 8px 10px; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-secondary); }
+    .tech-pill { padding: 5px 13px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-pill); }
+
+    /* ---------- Credentials ---------- */
+
+    .creds-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: start; }
+
+    .cert-row { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: baseline; padding: 18px 0; border-top: 1px solid var(--border); }
+    .cert-row h3 { margin: 0; font-size: 16px; font-weight: 500; color: var(--text-bright); }
+    .cert-row p { margin: 4px 0 0; font-size: 13.5px; color: var(--text-secondary); }
+    .cert-row .mono-meta { white-space: nowrap; }
+
+    .cert-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; border-top: 1px solid var(--border); padding-top: 26px; font-family: var(--font-mono); font-size: 11.5px; }
+    .cert-links a { color: var(--accent); }
+    .cert-links .sep { color: var(--border-strong); }
+
+    .stat-cards { display: grid; gap: 12px; }
+    .stat-card {
+      background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-card);
+      padding: 22px 24px; display: flex; justify-content: space-between; align-items: baseline; gap: 18px;
     }
+    .stat-card h3 { margin: 0; font-size: 15px; font-weight: 500; color: var(--text-bright); }
+    .stat-card p { margin: 3px 0 0; font-size: 13px; color: var(--text-secondary); }
+    .stat-card .figure { font-family: var(--font-display); font-size: 26px; line-height: 1; color: var(--accent); }
 
-    .slide-item .slide-title {
-      font-weight: 600;
-      margin-bottom: 4px;
+    .devcard-block {
+      display: block; background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 22px 24px;
     }
+    .devcard-block:hover { border-color: var(--accent); }
+    .devcard-block .mono-meta { letter-spacing: .12em; margin-bottom: 14px; }
+    .devcard-img { display: block; width: 100%; border-radius: var(--radius-btn); }
 
-    .slide-item .slide-meta {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+    /* ---------- Connect ---------- */
+
+    .connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; padding-bottom: 72px; }
+    .connect-headline {
+      margin: 0 0 20px; font-family: var(--font-display); font-size: 44px; line-height: 1.12;
+      letter-spacing: -.02em; max-width: 22ch; color: var(--text-bright);
     }
-
-    /* Tech Stack */
-    .tech-category {
-      margin-bottom: 24px;
-    }
-
-    .tech-category h3 {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .tech-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tech-pill {
-      padding: 6px 14px;
-      background-color: var(--bg-tertiary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      font-size: 0.8rem;
-      color: var(--text-primary);
-      transition: border-color 0.2s ease;
-    }
-
-    .tech-pill:hover {
-      border-color: var(--accent);
-    }
-
-    /* Developer Card */
-    .dev-card {
-      text-align: center;
-    }
-
-    .devcard-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: var(--radius-card);
-      border: 1px solid var(--border);
-      transition: border-color 0.2s ease;
-    }
-
-    .devcard-img:hover {
-      border-color: var(--accent);
-    }
-
-    /* Certifications */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .cert-card {
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 24px;
-      text-align: center;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .cert-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .cert-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-
-    .cert-card h3 {
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-    }
-
-    .cert-card p {
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-    }
-
-    .cert-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-    }
-
-    .cert-links a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: opacity 0.2s ease;
-    }
-
-    .cert-links a:hover {
-      opacity: 0.8;
-      text-decoration: underline;
-    }
-
-    /* Connect */
-    .connect-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
+    .connect-copy { margin: 0 0 30px; max-width: 44ch; font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
+    .connect-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
     .connect-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-btn);
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);
+    }
+    .connect-link:hover { color: var(--accent); border-color: var(--border-strong); }
+    .connect-link .arrow { font-size: 10px; }
+
+    /* ---------- Footer ---------- */
+
+    .site-footer { border-top: 1px solid var(--border); }
+    .site-footer .wrap {
+      padding: 28px var(--gutter); display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: .06em; color: var(--text-muted);
     }
 
-    .connect-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 1000px) {
+      :root { --rail: 180px; }
+      .split { gap: 44px; }
+      .creds-grid { gap: 36px; }
     }
 
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 40px 24px;
-      border-top: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.85rem;
+    @media (max-width: 860px) {
+      :root { --gutter: 22px; }
+      .site-nav .nav-links { display: none; }
+      .site-nav { gap: 12px; }
+      .nav-toggle { display: block; }
+      .split, .hero-grid, .creds-grid, .connect-grid { grid-template-columns: 1fr; gap: 32px; }
+      .cards-grid, .about-cols, .articles-grid, .connect-links { grid-template-columns: 1fr; }
+      .photo-grid, .stats { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding: 64px 0 56px; }
+      .hero.wrap { padding-left: 28px; padding-right: 28px; }
+      section.band { padding: 56px 0; }
+      .hero h1 { font-size: 40px; }
+      .tagline { font-size: 16px; }
+      .lede { font-size: 26px; }
+      .connect-headline { font-size: 34px; }
+      .hero-grid { align-items: start; }
+      .portrait { aspect-ratio: 4 / 3; }
     }
 
-    /* Loading state */
-    .loading {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      padding: 20px;
-      text-align: center;
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 34px; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .cta-group { flex-direction: column; }
+      .cta-group a { text-align: center; }
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      section {
-        padding: 48px 0;
-      }
-
-      .hero {
-        padding: 60px 0 48px;
-      }
-
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-
-      .hero .tagline {
-        font-size: 1rem;
-      }
-
-      .hero .avatar {
-        width: 120px;
-        height: 120px;
-      }
-
-      .section-title {
-        font-size: 1.4rem;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .photo-grid img {
-        height: 180px;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .articles-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .connect-links {
-        flex-direction: column;
-      }
-
-      .connect-link {
-        justify-content: center;
-      }
-
-      .cta-group {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 16px;
-      }
-
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-
-      .badges {
-        flex-direction: column;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
   </style>
 </head>
 <body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="#top">
+        <strong>Ifan Zalukhu</strong>
+        <span>.NET &middot; AWS</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <span class="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Expertise</a>
+          <a href="#speaking">Speaking</a>
+          <a href="#writing">Writing</a>
+          <a href="#stack">Stack</a>
+        </span>
+        <a class="nav-cta" href="mailto:ivan.zalukhu97@gmail.com">Let's talk</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="document.getElementById('mobile-menu').classList.add('open');this.setAttribute('aria-expanded','true');">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h14M4 11h14M4 15h14"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-close" aria-label="Close menu" onclick="document.getElementById('mobile-menu').classList.remove('open');document.querySelector('.nav-toggle').setAttribute('aria-expanded','false');">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+    <a href="#about" onclick="document.getElementById('mobile-menu').classList.remove('open')">About</a>
+    <a href="#work" onclick="document.getElementById('mobile-menu').classList.remove('open')">Expertise</a>
+    <a href="#speaking" onclick="document.getElementById('mobile-menu').classList.remove('open')">Speaking</a>
+    <a href="#writing" onclick="document.getElementById('mobile-menu').classList.remove('open')">Writing</a>
+    <a href="#stack" onclick="document.getElementById('mobile-menu').classList.remove('open')">Stack</a>
+    <a href="#credentials" onclick="document.getElementById('mobile-menu').classList.remove('open')">Credentials</a>
+    <a href="#connect" onclick="document.getElementById('mobile-menu').classList.remove('open')">Connect</a>
+    <a class="nav-cta" href="mailto:ivan.zalukhu97@gmail.com">Let's talk</a>
+  </div>
+
   <main>
     {{ content }}
   </main>
 
-  <footer class="footer">
-    <p>&copy; 2025 Ifan Zalukhu. Built with code and coffee.</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; {{ 'now' | date: "%Y" }} Ifan Jaya Suswanto Zalukhu</span>
+      <span>Medan, Indonesia — built with code and coffee</span>
+    </div>
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-      var container = document.getElementById('articles-grid');
-      if (!container) return;
-      try {
-        var res = await fetch('https://dev.to/api/articles?username=ifanzalukhu97&per_page=4');
-        if (!res.ok) throw new Error('API error');
-        var articles = await res.json();
-        if (articles.length === 0) {
-          container.innerHTML = '<p class="loading">No articles yet. Check out my <a href="https://dev.to/ifanzalukhu97">dev.to profile</a>.</p>';
-          return;
-        }
-        container.innerHTML = articles.map(function(a) {
-          var date = new Date(a.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-          return '<a href="' + a.url + '" target="_blank" rel="noopener" class="article-card">' +
-            '<h3>' + a.title + '</h3>' +
-            '<span class="article-meta">' + date + ' &middot; ' + a.reading_time_minutes + ' min read</span>' +
-            '</a>';
-        }).join('');
-      } catch (e) {
-        container.innerHTML = '<p class="loading">Check out my articles on <a href="https://dev.to/ifanzalukhu97">dev.to</a></p>';
+    (function () {
+      var grid = document.getElementById('articles-grid');
+      if (!grid) return;
+
+      function fallback() {
+        grid.innerHTML =
+          '<div class="articles-fallback">Latest articles are published on ' +
+          '<a href="https://dev.to/ifanzalukhu97" target="_blank" rel="noopener">dev.to/ifanzalukhu97</a>' +
+          ' — open the profile for the full list.</div>';
       }
-    });
+
+      function fmt(iso) {
+        if (!iso) return '';
+        var d = new Date(iso);
+        if (isNaN(d)) return '';
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+        });
+      }
+
+      fetch('https://dev.to/api/articles?username=ifanzalukhu97&per_page=4')
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (rows) {
+          if (!Array.isArray(rows) || rows.length === 0) return fallback();
+          grid.innerHTML = rows.map(function (a) {
+            var meta = fmt(a.published_at);
+            if (a.reading_time_minutes) meta += ' · ' + a.reading_time_minutes + ' min read';
+            return '<a class="article-card" href="' + esc(a.url) + '" target="_blank" rel="noopener">' +
+              '<div class="article-meta mono-meta">' + esc(meta) + '</div>' +
+              '<div class="article-title">' + esc(a.title) + '</div>' +
+              '</a>';
+          }).join('');
+        })
+        .catch(fallback);
+    })();
   </script>
+
 </body>
 </html>
