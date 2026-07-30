@@ -1,0 +1,260 @@
+---
+layout: default
+---
+
+<div class="container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <img class="avatar" src="https://github.com/ifanzalukhu97/usu-workshop-genai-n8n-gemini/raw/master/images/simplidots-image.jpg" alt="Ifan Jaya Suswanto Zalukhu — Senior .NET Backend Engineer" width="150" height="150">
+    <h1>Ifan Jaya Suswanto Zalukhu</h1>
+    <p class="tagline">Senior C# .NET Backend Engineer | AWS Community Builder | AI & Workflow Automation Enthusiast</p>
+    <div class="cta-group">
+      <a class="btn-primary" href="mailto:ivan.zalukhu97@gmail.com">Let's Talk</a>
+      <a class="btn-secondary" href="https://linkedin.com/in/ifanzalukhu97" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <h2 class="section-title"><span class="accent">//</span> About Me</h2>
+    <p>
+      I'm a <span class="highlight">hands-on builder</span> who happens to lead engineering teams. With <span class="highlight">6+ years in C# and .NET</span>, I design and ship scalable backend systems — from high-performance APIs to complex microservices architectures across SaaS and supply chain domains. Currently serving as <span class="highlight">Head of Engineering at SimpliDOTS</span>, I balance engineering strategy with staying deep in the code. I've been <span class="highlight">fully remote for ~6 years</span>, thriving in async-first distributed teams. Lately, I'm obsessed with applying AI and workflow automation to eliminate repetitive engineering work and ship faster.
+    </p>
+  </section>
+
+  <!-- What I Do -->
+  <section class="what-i-do">
+    <h2 class="section-title"><span class="accent">//</span> What I Do</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>Backend Systems</h3>
+        <p>Scalable microservices, high-performance APIs, and complex integrations with .NET Core. Built for reliability and maintainability.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>AI & Automation</h3>
+        <p>LLM/GPT integration, n8n workflow automation, and AI-assisted developer tooling. Making teams ship faster with less repetitive work.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <h3>Cloud Architecture</h3>
+        <p>AWS (ECS, Lambda, SQS, S3) and Azure (App Service, DevOps). Containerized deployments and infrastructure that scales.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <h3>Engineering Leadership</h3>
+        <p>Team scaling, CI/CD culture, engineering processes, and remote-first collaboration. Leading by building, not just directing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speaking & Community -->
+  <section class="speaking">
+    <h2 class="section-title"><span class="accent">//</span> Speaking & Community</h2>
+    <div class="photo-grid">
+      <img src="images/GDG-Sharing.JPG" alt="Ifan speaking at GDG DevFest Medan 2024">
+      <img src="images/GDG-Sharing-2.jpg" alt="Ifan presenting at GDG DevFest Medan 2024">
+      <img src="https://raw.githubusercontent.com/ifanzalukhu97/workshop-bwai-medan-2025/main/Docs/DSCF0326.jpg" alt="Ifan leading Build with AI workshop Medan 2025">
+      <img src="https://raw.githubusercontent.com/ifanzalukhu97/workshop-bwai-medan-2025/main/Docs/DSCF0263.jpg" alt="Audience at Build with AI Medan 2025 workshop">
+    </div>
+    <div class="badges">
+      <a class="badge badge-link" href="https://builder.aws.com/community/@ifanzalukhu97?tab=badges" target="_blank" rel="noopener">🏅 AWS Community Builder — AI Engineering</a>
+      <span class="badge">🎙️ GDG DevFest Speaker</span>
+      <a class="badge badge-link" href="https://www.meetup.com/aws-user-group-medan/" target="_blank" rel="noopener">🤝 AWS User Group Medan Co-Organizer</a>
+    </div>
+  </section>
+
+  <!-- Recent Articles -->
+  <section class="articles">
+    <h2 class="section-title"><span class="accent">//</span> Recent Articles</h2>
+    <div id="articles-grid" class="articles-grid">
+      <p class="loading">Loading latest articles...</p>
+    </div>
+    <div class="read-more-links">
+      <a href="https://dev.to/ifanzalukhu97" target="_blank" rel="noopener">Dev.to</a>
+      <a href="https://medium.com/@ifanzalukhu97" target="_blank" rel="noopener">Medium</a>
+      <a href="https://builder.aws.com/community/@ifanzalukhu97?tab=articles" target="_blank" rel="noopener">AWS Builder Center</a>
+    </div>
+  </section>
+
+  <!-- Recent Slides -->
+  <section class="slides">
+    <h2 class="section-title"><span class="accent">//</span> Recent Slides</h2>
+    <div class="slides-list">
+      {% assign sorted_slides = site.slides | sort: "date" | reverse %}
+      {% for slide in sorted_slides limit:4 %}
+      <a class="slide-item" href="{{ slide.url }}">
+        <div class="slide-title">{{ slide.title }}</div>
+        <span class="slide-meta">{{ slide.event }} — {{ slide.date | date: "%b %Y" }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="tech-stack">
+    <h2 class="section-title"><span class="accent">//</span> Tech Stack</h2>
+
+    <div class="tech-category">
+      <h3>Backend / .NET</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">C#</span>
+        <span class="tech-pill">.NET Core 3.1–9</span>
+        <span class="tech-pill">.NET Framework 4.6</span>
+        <span class="tech-pill">ASP.NET Core Web API</span>
+        <span class="tech-pill">MVC</span>
+        <span class="tech-pill">Entity Framework Core</span>
+        <span class="tech-pill">LINQ</span>
+        <span class="tech-pill">REST API</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Database</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">MS SQL Server</span>
+        <span class="tech-pill">Azure SQL</span>
+        <span class="tech-pill">T-SQL</span>
+        <span class="tech-pill">Stored Procedures</span>
+        <span class="tech-pill">Query Optimization</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Cloud — AWS</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">ECS</span>
+        <span class="tech-pill">Lambda</span>
+        <span class="tech-pill">SQS</span>
+        <span class="tech-pill">CloudWatch</span>
+        <span class="tech-pill">S3</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Cloud — Azure</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">App Service</span>
+        <span class="tech-pill">WebJobs</span>
+        <span class="tech-pill">Blob Storage</span>
+        <span class="tech-pill">Azure DevOps CI/CD</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>DevOps & Infrastructure</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">Docker</span>
+        <span class="tech-pill">CI/CD Pipelines</span>
+        <span class="tech-pill">Containerized Deployments</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Messaging & Integration</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">RabbitMQ</span>
+        <span class="tech-pill">Amazon SQS</span>
+        <span class="tech-pill">REST API Integration</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Testing</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">xUnit</span>
+        <span class="tech-pill">Integration Tests</span>
+        <span class="tech-pill">Cypress (E2E)</span>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>AI & Automation</h3>
+      <div class="tech-pills">
+        <span class="tech-pill">LLM/GPT</span>
+        <span class="tech-pill">GitHub Copilot</span>
+        <span class="tech-pill">n8n Workflows</span>
+        <span class="tech-pill">Kiro</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer Card -->
+  <section class="dev-card">
+    <h2 class="section-title"><span class="accent">//</span> Developer Card</h2>
+    <a href="https://daily.dev/ifanzalukhu97" target="_blank" rel="noopener">
+      <img class="devcard-img" src="https://api.daily.dev/devcards/v2/NfqzIu4ln.png?type=wide&r=fze" width="652" alt="Ifan Jaya Suswanto Zalukhu's Dev Card" loading="lazy">
+    </a>
+  </section>
+
+  <!-- Certifications & Badges -->
+  <section class="certifications">
+    <h2 class="section-title"><span class="accent">//</span> Certifications & Badges</h2>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🎖️</div>
+        <h3>Azure AI Engineer Associate</h3>
+        <p>Microsoft Certified</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎖️</div>
+        <h3>Azure AI Fundamentals</h3>
+        <p>Microsoft Certified</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎖️</div>
+        <h3>Foundation of Generative AI</h3>
+        <p>Professional Certification</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">☁️</div>
+        <h3>AWS SimuLearn - AI Practitioner</h3>
+        <p>AWS Training and Certification · Oct 2025</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">💎</div>
+        <h3>Google Cloud Skills Boost</h3>
+        <p>Diamond League · 26,604 pts · 47 badges</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <h3>Microsoft Learn</h3>
+        <p>Level 12 · 280,875 XP · 184 badges · 33 trophies</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <h3>Credly Verified Badges</h3>
+        <p>24 badges · Google Cloud & AWS</p>
+      </div>
+    </div>
+    <div class="cert-links">
+      <a href="https://www.credly.com/users/ifanzalukhu97" target="_blank" rel="noopener">View Credly Profile →</a>
+      <a href="https://skillsprofile.skillbuilder.aws/user/ifanzalukhu97/certification-badges" target="_blank" rel="noopener">View AWS Skill Builder →</a>
+      <a href="https://www.skills.google/public_profiles/ed12b36a-c4cb-466b-bfb8-83f5fd0b74d1" target="_blank" rel="noopener">View Google Skills →</a>
+      <a href="https://learn.microsoft.com/en-us/users/ifanzalukhu97" target="_blank" rel="noopener">View Microsoft Learn →</a>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section class="connect">
+    <h2 class="section-title"><span class="accent">//</span> Connect</h2>
+    <div class="connect-links">
+      <a class="connect-link" href="https://linkedin.com/in/ifanzalukhu97" target="_blank" rel="noopener">🔗 LinkedIn.com/in/ifanzalukhu97</a>
+      <a class="connect-link" href="https://github.com/ifanzalukhu97" target="_blank" rel="noopener">🐙 github.com/ifanzalukhu97</a>
+      <a class="connect-link" href="https://dev.to/ifanzalukhu97" target="_blank" rel="noopener">✍️ dev.to/ifanzalukhu97</a>
+      <a class="connect-link" href="https://medium.com/@ifanzalukhu97" target="_blank" rel="noopener">📝 medium.com/@ifanzalukhu97</a>
+      <a class="connect-link" href="https://builder.aws.com/community/@ifanzalukhu97" target="_blank" rel="noopener">☁️ builder.aws.com/community/@ifanzalukhu97</a>
+      <a class="connect-link" href="https://www.hackerrank.com/ifanzalukhu97" target="_blank" rel="noopener">💻 hackerrank.com/ifanzalukhu97</a>
+      <a class="connect-link" href="https://g.dev/Ifanzalukhu97" target="_blank" rel="noopener">🟢 g.dev/Ifanzalukhu97</a>
+      <a class="connect-link" href="https://learn.microsoft.com/en-us/users/ifanzalukhu97" target="_blank" rel="noopener">🎓 learn.microsoft.com/en-us/users/ifanzalukhu97</a>
+      <a class="connect-link" href="https://daily.dev/ifanzalukhu97" target="_blank" rel="noopener">📰 daily.dev/ifanzalukhu97</a>
+      <a class="connect-link" href="https://www.credly.com/users/ifanzalukhu97" target="_blank" rel="noopener">🏅 credly.com/users/ifanzalukhu97</a>
+      <a class="connect-link" href="https://www.skills.google/public_profiles/ed12b36a-c4cb-466b-bfb8-83f5fd0b74d1" target="_blank" rel="noopener">🎓 skills.google/ifanzalukhu97</a>
+      <a class="connect-link" href="https://www.dicoding.com/users/ifanzalukhu97/academies" target="_blank" rel="noopener">📚 dicoding.com/users/ifanzalukhu97</a>
+      <a class="connect-link" href="https://skillsprofile.skillbuilder.aws/user/ifanzalukhu97/certification-badges" target="_blank" rel="noopener">☁️ skillsprofile.skillbuilder.aws/ifanzalukhu97</a>
+    </div>
+  </section>
+
+</div>

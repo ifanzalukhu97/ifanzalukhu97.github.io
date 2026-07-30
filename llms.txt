@@ -1,0 +1,35 @@
+# Ifan Jaya Suswanto Zalukhu
+
+> Senior C# .NET Backend Engineer, Head of Engineering at SimpliDOTS, and AWS Community Builder (AI Engineering). Based in Indonesia, working fully remote for ~6 years.
+
+Ifan designs and ships scalable backend systems — high-performance APIs, microservices architectures across SaaS and supply chain domains. He combines engineering leadership with hands-on coding, and actively contributes to the developer community through speaking engagements, workshops, and open-source.
+
+Key areas of expertise: C# / .NET Core, AWS (ECS, Lambda, SQS), Azure, AI/LLM integration, n8n workflow automation, Docker, and engineering team leadership.
+
+## Links
+
+- [Personal website](https://www.ifanzalukhu97.com): Landing page with portfolio, certifications, tech stack, and community involvement
+- [LinkedIn](https://linkedin.com/in/ifanzalukhu97): Professional profile and connections
+- [GitHub](https://github.com/ifanzalukhu97): Open-source projects and code
+- [Dev.to articles](https://dev.to/ifanzalukhu97): Technical blog posts on .NET, AI, and cloud
+- [Medium](https://medium.com/@ifanzalukhu97): Additional technical writing
+- [AWS Community Builder profile](https://builder.aws.com/community/@ifanzalukhu97): AWS articles and badges
+
+## Slides
+
+- [From Problem to Product](https://www.ifanzalukhu97.com/slides/from-problem-to-product.html): Presented at IEC 2026 (Jun 2026)
+- [Kiro for .NET: MS SQL Server Optimization in Hours, Not Days](https://www.ifanzalukhu97.com/slides/demo-aws-summit-jkt-2026.html): Presented at AWS Summit Jakarta 2026 (Aug 2026)
+
+## Certifications
+
+- [Credly profile](https://www.credly.com/users/ifanzalukhu97): 24 verified badges (Google Cloud & AWS)
+- [AWS Skill Builder](https://skillsprofile.skillbuilder.aws/user/ifanzalukhu97/certification-badges): AWS SimuLearn - AI Practitioner
+- [Google Cloud Skills Boost](https://www.skills.google/public_profiles/ed12b36a-c4cb-466b-bfb8-83f5fd0b74d1): Diamond League · 47 badges
+- [Microsoft Learn](https://learn.microsoft.com/en-us/users/ifanzalukhu97): Azure AI Engineer Associate, Azure AI Fundamentals · Level 12 · 184 badges
+
+## Optional
+
+- [daily.dev DevCard](https://daily.dev/ifanzalukhu97): Developer reading stats
+- [HackerRank](https://www.hackerrank.com/ifanzalukhu97): Coding challenges profile
+- [Dicoding](https://www.dicoding.com/users/ifanzalukhu97/academies): Learning platform profile
+- [Google Developer profile](https://g.dev/Ifanzalukhu97): Google developer identity
