@@ -7,3 +7,10 @@ collections:
   slides:
     output: false
     sort_by: date
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - job-logs.txt
+  - .kiro
