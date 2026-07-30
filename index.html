@@ -13,9 +13,11 @@ layout: default
         <a class="btn-primary" href="mailto:ivan.zalukhu97@gmail.com">Let's Talk</a>
         <a class="btn-secondary" href="https://linkedin.com/in/ifanzalukhu97" target="_blank" rel="noopener">Connect on LinkedIn</a>
       </div>
+      {% assign yrs = 'now' | date: "%Y" | minus: 2020 %}
+      {% assign remote_yrs = 'now' | date: "%Y" | minus: 2020 %}
       <dl class="stats">
-        <div><dt>6+</dt><dd>Years C# / .NET</dd></div>
-        <div><dt>6</dt><dd>Years fully remote</dd></div>
+        <div><dt>{{ yrs }}+</dt><dd>Years C# / .NET</dd></div>
+        <div><dt>{{ remote_yrs }}</dt><dd>Years fully remote</dd></div>
         <div><dt>24</dt><dd>Verified badges</dd></div>
         <div><dt>AWS</dt><dd>Community Builder</dd></div>
       </dl>
