@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "profile",
+      "type": "skill-md",
+      "description": "Retrieve Ifan Zalukhu's professional profile: role, expertise, and links.",
+      "url": "https://www.ifanzalukhu97.com/.well-known/agent-skills/profile/SKILL.md",
+      "digest": "sha256:ba8a85a9d19dbf329f74b9f1a1faf386f616748fe6a0334a2d9b844d0eb5cb76"
+    },
+    {
+      "name": "articles",
+      "type": "skill-md",
+      "description": "Find Ifan Zalukhu's latest technical articles on .NET, AWS, and AI.",
+      "url": "https://www.ifanzalukhu97.com/.well-known/agent-skills/articles/SKILL.md",
+      "digest": "sha256:6f90f60ddcd36605efdc484bdc723745d0d282514e144cbfecef7529b8da7c1a"
+    },
+    {
+      "name": "talks",
+      "type": "skill-md",
+      "description": "List Ifan Zalukhu's conference talks and slide decks.",
+      "url": "https://www.ifanzalukhu97.com/.well-known/agent-skills/talks/SKILL.md",
+      "digest": "sha256:55622d55a7dca049832e09cf2a82403962e7cea7ac8323479acdc1bcb7b5307e"
+    }
+  ]
+}

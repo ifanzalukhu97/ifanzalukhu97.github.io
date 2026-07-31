@@ -1,0 +1,16 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ site.url }}/</loc>
+  </url>
+  {% for slide in site.slides %}
+  <url>
+    <loc>{{ site.url }}{{ slide.url }}</loc>
+    <lastmod>{{ slide.date | date_to_xmlschema }}</lastmod>
+  </url>
+  {% endfor %}
+</urlset>

@@ -503,6 +503,52 @@
         })
         .catch(fallback);
     })();
+
+    (function () {
+      if (!(navigator.modelContext && typeof navigator.modelContext.registerTool === 'function')) return;
+
+      var PROFILE = {
+        name: "Ifan Jaya Suswanto Zalukhu",
+        title: "Head of Engineering, SimpliDOTS",
+        tagline: "Senior C# .NET Backend Engineer, AWS Community Builder (AI Engineering)",
+        links: {
+          linkedin: "https://linkedin.com/in/ifanzalukhu97",
+          github: "https://github.com/ifanzalukhu97",
+          devto: "https://dev.to/ifanzalukhu97"
+        }
+      };
+
+      var TALKS = [
+        {% for slide in site.slides %}
+        { title: {{ slide.title | jsonify }}, event: {{ slide.event | jsonify }}, date: {{ slide.date | date_to_xmlschema | jsonify }}, url: {{ slide.url | jsonify }} }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ];
+
+      navigator.modelContext.registerTool({
+        name: "get_profile",
+        description: "Get Ifan Zalukhu's professional profile summary and key links.",
+        inputSchema: { type: "object", properties: {} },
+        execute: function () { return PROFILE; }
+      });
+
+      navigator.modelContext.registerTool({
+        name: "list_talks",
+        description: "List conference talks and slide decks by Ifan Zalukhu.",
+        inputSchema: { type: "object", properties: {} },
+        execute: function () { return TALKS; }
+      });
+
+      navigator.modelContext.registerTool({
+        name: "list_recent_articles",
+        description: "List Ifan Zalukhu's most recent dev.to articles.",
+        inputSchema: { type: "object", properties: {} },
+        execute: function () {
+          return fetch('https://dev.to/api/articles?username=ifanzalukhu97&per_page=4')
+            .then(function (r) { return r.ok ? r.json() : []; })
+            .catch(function () { return []; });
+        }
+      });
+    })();
   </script>
 
 </body>

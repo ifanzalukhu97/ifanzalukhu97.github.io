@@ -8,6 +8,9 @@ collections:
     output: false
     sort_by: date
 
+include:
+  - .well-known
+
 exclude:
   - Gemfile
   - Gemfile.lock

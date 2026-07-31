@@ -1,0 +1,124 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Create `/robots.txt` at repo root per the design's structure: `User-agent: *` block with `Allow: /` and `Content-Signal: ai-train=yes, search=yes, ai-input=yes`; explicit `User-agent`/`Allow: /` blocks for GPTBot, OAI-SearchBot, ChatGPT-User, Claude-Web, anthropic-ai, Google-Extended, Amazonbot, Bytespider, CCBot, Applebot-Extended; and a trailing `Sitemap: https://www.ifanzalukhu97.com/sitemap.xml` line.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062686
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518106798
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518195769
+      }
+    ],
+    "2. Create `/sitemap.xml` at repo root as a Jekyll page with `layout: null` and `permalink: /sitemap.xml` front matter, containing a Liquid loop that emits a `<url><loc></loc></url>` entry for the homepage and one for every item in `site.slides` (with `<lastmod>` from `slide.date`), per the design's template.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062811
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518113682
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518197931
+      }
+    ],
+    "3. Add `include: [.well-known]` to `_config.yml` so the dot-prefixed `.well-known/` directory is not excluded from the Jekyll build output.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062852
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518114750
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518198820
+      }
+    ],
+    "4. Create `.well-known/agent-skills/profile/SKILL.md`, `.well-known/agent-skills/articles/SKILL.md`, and `.well-known/agent-skills/talks/SKILL.md`, each documenting in plain language a real, already-existing data source: `profile` points to `/llms.txt`, `articles` points to the public dev.to API endpoint (`https://dev.to/api/articles?username=ifanzalukhu97&per_page=4`), `talks` points to the homepage's Recent Slides section / `site.slides` data. No endpoint or capability described may be one the site does not actually have.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062895
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518206455
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518274086
+      }
+    ],
+    "5. Compute the SHA-256 digest of each SKILL.md file created in task 4 (`shasum -a 256 <file>`), then create `.well-known/agent-skills/index.json` with `$schema: \"https://schemas.agentskills.io/discovery/0.2.0/schema.json\"` and a `skills` array containing one entry per file with `name`, `type: \"skill-md\"`, `description`, `url`, and `digest: \"sha256:{computed-hex}\"`.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062918
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518281249
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518622822
+      }
+    ],
+    "6. Append a feature-detected WebMCP registration IIFE to the existing inline `<script>` block in `_layouts/default.html`, placed after the current dev.to fetch logic without modifying it. Guard on `navigator.modelContext && typeof navigator.modelContext.registerTool === 'function'` before doing anything. Register three read-only tools: `get_profile` (returns a static profile object with name/title/tagline/links), `list_talks` (returns an array built via Liquid from `site.slides`, each with title/event/date/url), and `list_recent_articles` (fetches the same dev.to endpoint used elsewhere, returning `[]` on failure). Each tool must define `name`, `description`, `inputSchema`, and `execute`.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062947
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518629749
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518763667
+      }
+    ],
+    "7. Run `bundle exec jekyll build` and fix any build errors, then run a one-off shell verification check confirming: `_site/robots.txt` exists and contains `User-agent`; `_site/sitemap.xml` exists, is well-formed XML, and contains a `<loc>` entry for the homepage and for each slide in `_slides/`; `_site/.well-known/agent-skills/index.json` exists and each of its `digest` values matches a fresh `shasum -a 256` of the corresponding SKILL.md file in `_site/`.": [
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518062974
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518770417
+      },
+      {
+        "executionId": "19fac445-2beb-4ccb-850c-aea34fa2a5b6",
+        "chatSessionId": "sess_6712b60b-b4b4-490e-9668-e30710943af6",
+        "timestamp": 1785518911830
+      }
+    ]
+  }
+}
